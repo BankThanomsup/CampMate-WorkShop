@@ -1,11 +1,15 @@
+const renderError = require("../utils/renderError");
+const{ clerkClient } = require("@clerk/express")
 exports.authCheck = (req, res, next) => {
+  //code body
   try {
-    console.log("Hello auth check");
-    if (false) {
-      next();
-    }else{res.status(401).json({ message: "Unauthorized" });}
+   const userId = req.auth.userId;
+   if(!userId){
+    return  renderError(401,"Unauthorized");
+   }
+   next();
+
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err)
   }
 };

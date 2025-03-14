@@ -10,13 +10,15 @@ import CategoryInput from "@/components/form/Categoryinput";
 import MainMap from "@/components/map/Mainmap";
 
 
+
 const Camping = () => {
-  const { register, handleSubmit,formState, setValue} = useForm({
-    resolver: zodResolver(campingSchema),
-  });
+  const { register, handleSubmit,formState, setValue} = useForm(
+    {resolver: zodResolver(campingSchema)}
+  );
   const {errors,isSubmitting} = formState;
   // console.log("Form Errors:", errors); // Debugging
   console.log(isSubmitting)
+
   const BankSubmit = async (data) => {
     await new Promise((resolve)=>setTimeout(resolve,3000))
     console.log(data);

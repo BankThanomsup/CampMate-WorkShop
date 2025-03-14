@@ -6,6 +6,7 @@ import Dashboard from "@/pages/admin/Dashboard";
 import Manage from "@/pages/admin/Manage";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
+import Profile from "@/pages/user/Profile";
 import React from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 const AppRoutes = () => {
@@ -19,12 +20,16 @@ const AppRoutes = () => {
         </Route>
 
       {/* {Private User} */}
-        
+        <Route path="user" element={<Layout />}>
+          <Route path="profile" element={<Profile />} />
+          
+          
+        </Route>
 
 
 
 
-        {/* {Private} */}
+        {/* {Private Admin} */}
         <Route path="admin" element={<LayoutAdmin />}>
           <Route index element={<Dashboard />} />
           <Route path="manage" element={<Manage />} />
