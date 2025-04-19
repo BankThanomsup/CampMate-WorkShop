@@ -8,7 +8,7 @@ export const createProfile =async (token , data)=>{
         headers:{
             Authorization: `Bearer ${token}`
         }
-    })
+    })  
 }
 
 
