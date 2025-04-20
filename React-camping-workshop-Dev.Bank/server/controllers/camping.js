@@ -1,11 +1,11 @@
 const prisma = require("../config/prisma");
 
 
-exports.listCamping = (req, res) => {
+exports.listCamping = async (req, res) => {
   try {
-    console.log("Hello list camping");
+    const campings = await prisma.landmark.findMany()
     
-
+  res.json({result: campings, message: "Camping list successfully"});
     res.send("Hello list camping");
   } catch (err) {
     console.log(err.message);
@@ -13,10 +13,17 @@ exports.listCamping = (req, res) => {
   }
 };
 
-exports.readCamping = (req, res) => {
+exports.readCamping = async(req, res) => {
+
   try {
-    console.log("Hello read camping");
-    res.send("Hello read camping");
+    const { id } = req.params;
+    const camping = await prisma.landmark.findFirst({
+      where:{
+        id: Number(id),
+      }
+    })
+    
+    res.json({result: camping, message: "Camping read successfully"});
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: "Server Error" });

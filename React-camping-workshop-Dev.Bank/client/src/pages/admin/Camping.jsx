@@ -3,7 +3,6 @@ import TextAreaInput from "@/components/form/TextAreaInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { campingSchema } from "@/utils/schema";
-import { Button } from "@/components/ui/button";
 import Buttons from "@/components/form/Buttons";
 import CategoryInput from "@/components/form/Categoryinput";
 import MainMap from "@/components/map/Mainmap";

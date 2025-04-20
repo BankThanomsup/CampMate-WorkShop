@@ -13,12 +13,15 @@ const { authCheck } = require("../middlewares/auth");
 // @ENDPOINT http://localhost:5000/api/camping
 // @METHOD GET [get list camping]
 // @ACCESS public
-router.get("/camping", authCheck, listCamping);
+router.get("/camping",listCamping);
 
 // @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD GET [get read camping]
 // @ACCESS public
-router.get("/camping/:id", readCamping);
+router.get("/camping/:id",readCamping);
+
+
+
 
 // @ENDPOINT http://localhost:5000/api/camping
 // @METHOD POST [create camping]

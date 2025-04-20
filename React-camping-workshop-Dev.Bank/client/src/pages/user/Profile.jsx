@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormInputs from "@/components/form/FormInputs";
 import Buttons from "@/components/form/Buttons";
-import axios from "axios";
 import { profileSchema } from "@/utils/schema";
 import {createProfile} from "@/api/profile";
 
@@ -17,7 +16,7 @@ import { useAuth } from '@clerk/clerk-react'
 const Profile = () => {
     //cleck
     const { getToken } = useAuth()
-    const { register, handleSubmit,formState, setValue} = useForm(
+    const { register, handleSubmit,formState} = useForm(
       {resolver: zodResolver(profileSchema)}
     );
     const {errors,isSubmitting} = formState;
