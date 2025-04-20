@@ -9,12 +9,13 @@ exports.authCheck =  async (req, res, next) => {
    if(!userId){
     return  renderError(401,"Unauthorized");
    }
-   next();
+   
    const user = await clerkClient.users.getUser(userId);
-  //  console.log("User:", user); // Debugging
+  //  console.log("Hello middle ware"); // Debugging
+   console.log("User:", user); // Debugging
    req.user = user;
   //  console.log(req.user); // Debugging
-
+   next();
    // if (!user) {
    //   return renderError(401, "Unauthorized");
    // }

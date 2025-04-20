@@ -16,7 +16,7 @@ import { useAuth } from '@clerk/clerk-react'
 
 const Profile = () => {
     //cleck
-    const { getToken ,userId} = useAuth()
+    const { getToken } = useAuth()
     const { register, handleSubmit,formState, setValue} = useForm(
       {resolver: zodResolver(profileSchema)}
     );

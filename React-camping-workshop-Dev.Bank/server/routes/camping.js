@@ -23,7 +23,7 @@ router.get("/camping/:id", readCamping);
 // @ENDPOINT http://localhost:5000/api/camping
 // @METHOD POST [create camping]
 // @ACCESS private
-router.post("/camping", createCamping);
+router.post("/camping",authCheck,createCamping);
 
 // @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD PUT [edit camping]

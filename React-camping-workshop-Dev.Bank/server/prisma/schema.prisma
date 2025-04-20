@@ -6,10 +6,35 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id        Int        @id @default(autoincrement())
+  clerkId   String     @unique
+  firstname String
+  lastname  String
+  email     String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  landmarks landmark[]
+}
+
+model landmark {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  lat         Float
+  lng         Float
+  price       Int
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  profile     Profile  @relation(fields: [profileId], references: [clerkId])
+  profileId   String
 }
