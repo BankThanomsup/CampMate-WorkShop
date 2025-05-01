@@ -6,7 +6,6 @@ exports.listCamping = async (req, res) => {
     const campings = await prisma.landmark.findMany()
     
   res.json({result: campings, message: "Camping list successfully"});
-    res.send("Hello list camping");
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: "Server Error" });
