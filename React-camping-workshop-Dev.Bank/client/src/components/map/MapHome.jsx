@@ -1,27 +1,10 @@
-import { listCamping } from "@/api/camping";
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
+import { MapContainer } from "react-leaflet";
+import Layers from "./Layers";
 
 const MapHome = () => {
-  console.log("MapHome rendered");
-  const [landmarks, setlandmarks] = useState([]);
-
-  useEffect(() => {
-    //code first time render
-    hdlGetLandmarks();
-  }, []);
-
-  const hdlGetLandmarks = () => {
-    console.log("Fetching landmarks...");
-    listCamping()
-      .then((res) => {
-        setlandmarks(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  console.log("landmarks", landmarks);
+ 
+  // console.log("landmarks", landmarks);
   return (
     <div>
       <MapContainer
@@ -30,24 +13,9 @@ const MapHome = () => {
         zoom={7}
         scrollWheelZoom={true}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
 
-        {landmarks?.map((element) => {
-          {
-            /* console.log('element', element.title); */
-          }
+        <Layers />
 
-          return (
-            <Marker position={[element.lat, element.lng]}>
-              <Popup>
-                {element.title} <br /> {element.description}
-              </Popup>
-            </Marker>
-          );
-        })}
       </MapContainer>
     </div>
   );
