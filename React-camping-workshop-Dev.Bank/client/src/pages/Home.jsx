@@ -1,12 +1,9 @@
-
-import MapHome from "@/components/map/MapHome";
-
+import CampingContainer from "@/components/home/campingContainer";
 const Home = () => {
   return (
     <div>
-    
-    <MapHome />
-    
+
+    <CampingContainer />
     </div>
   );
 };

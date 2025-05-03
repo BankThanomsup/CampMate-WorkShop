@@ -12,7 +12,7 @@ const { clerkMiddleware } = require ("@clerk/express")
 
 //middleware
 app.use(cors());  //ติดไว้ก่อน
-app.use(express.json())
+app.use(express.json({limit:'10mb'}))
 app.use(morgan('dev'))
 // middleware
 app.use(clerkMiddleware());
