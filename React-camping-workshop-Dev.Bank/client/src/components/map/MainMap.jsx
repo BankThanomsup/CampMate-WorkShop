@@ -59,6 +59,11 @@ const MainMap = ({register,location,setValue}) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+          {
+            location &&  <Marker position={location}></Marker>
+          }
+          
+        
         <LocationMarker position={position} setPosition={setPosition} setValue={setValue}/>
       </MapContainer>
     </div>
