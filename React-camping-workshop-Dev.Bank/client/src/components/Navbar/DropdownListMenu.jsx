@@ -10,7 +10,7 @@ import {
 import { AlignLeft } from "lucide-react";
 import Usericon from "./Usericon";
 import { Button } from "../ui/button";
-import { links } from "@/utils/links";
+import { PublicLinks,PrivateLinks } from "@/utils/links";
 import { Link } from "react-router";
 import {
   SignedIn,
@@ -21,6 +21,7 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import SignOutLink from "./SignOutLink";
+
 const DropdownListMenu = () => {
   return (
     <div>
@@ -34,7 +35,7 @@ const DropdownListMenu = () => {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {links.map((item, index) => {
+          {PublicLinks.map((item, index) => {
             //code body javascript
             //return 1 element
             return (
@@ -57,14 +58,26 @@ const DropdownListMenu = () => {
               </SignUpButton>
             </DropdownMenuItem>
           </SignedOut>
-          <DropdownMenuItem>
+          
             {/* {กรณีที่ login แล้ว} */}
             <SignedIn>
+            {/* Link Other */}
+          {PrivateLinks.map((item, index) => {
+            //code body javascript
+            //return 1 element
+            return (
+              <DropdownMenuItem key={index}>
+                <Link to={item.href}>{item.label}</Link>
+              </DropdownMenuItem>
+            );
+          })}
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
               {/* <UserButton /> */}
               {/* <SignOutButton /> */}
               <SignOutLink />
+            </DropdownMenuItem>
             </SignedIn>
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

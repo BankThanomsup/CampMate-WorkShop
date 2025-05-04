@@ -1,18 +1,17 @@
 const prisma = require("../config/prisma");
 
 
-exports.listCamping = async (req, res) => {
+exports.listCamping = async (req, res, next) => {
   try {
     const campings = await prisma.landmark.findMany()
     
   res.json({result: campings, message: "Camping list successfully"});
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err)
   }
 };
 
-exports.readCamping = async(req, res) => {
+exports.readCamping = async(req, res, next) => {
 
   try {
     const { id } = req.params;
@@ -24,12 +23,11 @@ exports.readCamping = async(req, res) => {
     
     res.json({result: camping, message: "Camping read successfully"});
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err);
   }
 };
 
-exports.createCamping = async (req, res) => {
+exports.createCamping = async (req, res, next) => {
   try {
     console.log("req.body", req.body);
     const{ title, price, description, category,lat,lng,image } = req.body;
@@ -51,27 +49,24 @@ exports.createCamping = async (req, res) => {
     res.json({result: camping, message: "Camping created successfully"});
   } 
   catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err);
   }
 };
 
-exports.updateCamping = (req, res) => {
+exports.updateCamping = async (req, res, next) => {
   try {
-    console.log("Hello update camping");
+    // console.log("Hello update camping");
     res.send("Hello update camping");
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err);
   }
 };
 
-exports.deleteCamping = (req, res) => {
+exports.deleteCamping = async (req, res, next) => {
   try {
-    console.log("Hello delete camping");
+    // console.log("Hello delete camping");
     res.send("Hello delete camping");
   } catch (err) {
-    console.log(err.message);
-    res.status(500).json({ message: "Server Error" });
+    next(err);
   }
 };
