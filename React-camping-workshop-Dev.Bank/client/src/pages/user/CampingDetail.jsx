@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/campingDetail/Breadcrumbs";
 import ImageContainer from "@/components/campingDetail/imageContainer";
 import Description from "@/components/campingDetail/Description";
 import MainMap from "@/components/map/MainMap";
+import BookingContainer from "@/components/booking/BookingContainer";
 
 function CampingDetail() {
   const { id } = useParams();
@@ -46,16 +47,27 @@ function CampingDetail() {
           <p>Favorite</p>
         </div>
       </header>
+
       {/* image */}
       <ImageContainer image={camping.secure_url} name={camping.name}/>
-      {/* Description & Map*/}
-      <div>
 
+      {/* Description & Map*/}
+      <section className="lg:grid grid-cols-12 gap-x-12 mt-12">
+
+      <div className="lg:col-span-8 col-span-12">
       <Description text={camping.description}/>
        {
         camping.lat && <MainMap location={[camping.lat , camping.lng]}/>
        } 
       </div>
+
+      {/* Calendar */}
+      <div className="lg:col-span-4 flex flex-col items-center">
+        <BookingContainer campingId={camping.id} price={camping.price} bookings={[]}/>
+      </div>
+
+      </section>
+
     </div>
   );
 }
