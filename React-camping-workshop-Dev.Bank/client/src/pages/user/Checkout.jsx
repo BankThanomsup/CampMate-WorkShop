@@ -7,7 +7,7 @@ import { useAuth } from '@clerk/clerk-react';
 import { useParams } from 'react-router';
 import { checkOut } from '@/api/booking';
 
-const stripePromise = loadStripe("pk_test_51RNTVpFY8yJFUsVmzCMGrBaYtL6JkhEqZ2oatXmzk8tY1KcSa6W1FfYAgI8QPy6ostax5EYIvx1xj54XecPxf5K500JuzgVqrx");
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 
 const Checkout = () => {
