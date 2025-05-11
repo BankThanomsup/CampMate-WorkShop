@@ -14,21 +14,7 @@ Backend: Node.js, Express, Prisma ORM, MySQL
 
 📦 โครงสร้างโปรเจกต์
 
-React-camping-workshop/
-├── client/                 # โค้ดฝั่ง Frontend (React)
-│   ├── components/
-│   ├── pages/
-│   ├── api/
-│   └── ...
-├── server/                 # โค้ดฝั่ง Backend (Node.js + Express)
-│   ├── controllers/
-│   ├── routes/
-│   ├── prisma/
-│   └── ...
-├── prisma/                 # ไฟล์ schema ของ Prisma
-├── .env.local              # ไฟล์ Environment สำหรับ Frontend
-├── .env                    # ไฟล์ Environment สำหรับ Backend
-└── README.md
+<pre> ```bash React-camping-workshop/ ├── client/ # โค้ดฝั่ง Frontend (React) │ ├── components/ │ ├── pages/ │ ├── api/ │ └── ... ├── server/ # โค้ดฝั่ง Backend (Node.js + Express) │ ├── controllers/ │ ├── routes/ │ ├── prisma/ │ └── ... ├── prisma/ # ไฟล์ schema ของ Prisma ├── .env.local # ไฟล์ Environment สำหรับ Frontend ├── .env # ไฟล์ Environment สำหรับ Backend └── README.md ``` </pre>
 
 🧪 ฟีเจอร์หลัก
 🔍 ค้นหาและเรียกดูแคมป์
