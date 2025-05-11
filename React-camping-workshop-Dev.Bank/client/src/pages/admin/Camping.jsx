@@ -20,16 +20,16 @@ const Camping = () => {
   );
   const {errors,isSubmitting} = formState;
   // console.log("Form Errors:", errors); // Debugging
-  console.log(isSubmitting)
+  // console.log(isSubmitting)
   
 
   const hdlSubmit = async (data) => {
     await new Promise((resolve)=>setTimeout(resolve,1000))
     const token = await getToken()
-    console.log(data);
+    // console.log(data);
     createCamping(token,data)
     .then((res)=>{
-      console.log(res.data);
+      // console.log(res.data);
       // reset();
       createAlert("success","Create Landmark Suscess",2000)
     })

@@ -7,6 +7,7 @@ import {
 
 import { calToTal } from "@/utils/Booking";
 import { formatNumber } from "@/utils/formatNumber";
+import BookingConFirm from "./BookingConFirm";
 
 
 
@@ -37,9 +38,7 @@ const BookingFrom = () => {
           <span className="font font-semibold">{formatNumber(result.total)}</span>
          </p>
       </Card>
-      <p>
-        Confirm Booking
-      </p>
+    <BookingConFirm />
     </div>
   )
 }

@@ -8,28 +8,45 @@ datasource db {
 }
 
 model landmark {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   title       String
-  description String
+  description String  @db.VarChar(1000)
   lat         Float
   lng         Float
   price       Int
   public_id   String?
   secure_url  String?
   category    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   profileId   String
+  bookings    Booking[]
 
   @@index([profileId], map: "landmark_profileId_fkey")
 }
 
 model profile {
-  id        Int      @id @default(autoincrement())
-  clerkId   String   @unique(map: "Profile_clerkId_key")
+  id        Int       @id @default(autoincrement())
+  clerkId   String    @unique(map: "Profile_clerkId_key")
   firstname String
   lastname  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   email     String
+  bookings  Booking[]
+}
+
+model Booking {
+  id            Int       @id @default(autoincrement())
+  totalNights   Int
+  checkIn       DateTime
+  checkOut      DateTime
+  total         Int
+  paymentStatus Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  profile       profile  @relation(fields: [profileId], references: [clerkId])
+  profileId     String
+  landmark      landmark @relation(fields: [landmarkId], references: [id])
+  landmarkId    Int
 }

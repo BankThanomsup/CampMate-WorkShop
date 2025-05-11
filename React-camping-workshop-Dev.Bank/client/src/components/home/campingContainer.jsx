@@ -10,7 +10,7 @@ const campingContainer = () => {
     actionListCamping()
   },[])
 
-  console.log("campingContainer",actionListCamping)
+  // console.log("campingContainer",actionListCamping)
 
     
   return (

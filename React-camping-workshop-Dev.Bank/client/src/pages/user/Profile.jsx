@@ -27,7 +27,7 @@ const Profile = () => {
       const token = await getToken()
       createProfile(token,data)
       .then((res)=>{
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err)=>{
         console.log(err);

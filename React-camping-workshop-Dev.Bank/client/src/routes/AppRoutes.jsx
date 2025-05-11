@@ -11,6 +11,8 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 import CampingDetail from "@/pages/user/CampingDetail";
 import ProtectRoute from "./ProtectRoute";
+import Checkout from "@/pages/user/Checkout";
+import CheckoutComplete from "@/pages/user/CheckoutComplete";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -25,7 +27,8 @@ const AppRoutes = () => {
         <Route path="user" element={<Layout />}>
           <Route path="profile" element={<Profile />} />
           <Route path="camping/:id" element={<CampingDetail />} />
-          
+          <Route path="checkout/:id" element={<Checkout />} />
+          <Route path="complete/:session" element={<CheckoutComplete />} />
           
         </Route>
 
