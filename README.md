@@ -11,3 +11,44 @@ Backend: Node.js, Express, Prisma ORM, MySQL
 การจัดการผู้ใช้: Clerk
 
 การจัดการรูปภาพ: Cloudinary
+
+📦 โครงสร้างโปรเจกต์
+
+React-camping-workshop/
+├── client/                 # โค้ดฝั่ง Frontend (React)
+│   ├── components/
+│   ├── pages/
+│   ├── api/
+│   └── ...
+├── server/                 # โค้ดฝั่ง Backend (Node.js + Express)
+│   ├── controllers/
+│   ├── routes/
+│   ├── prisma/
+│   └── ...
+├── prisma/                 # ไฟล์ schema ของ Prisma
+├── .env.local              # ไฟล์ Environment สำหรับ Frontend
+├── .env                    # ไฟล์ Environment สำหรับ Backend
+└── README.md
+
+🧪 ฟีเจอร์หลัก
+🔍 ค้นหาและเรียกดูแคมป์
+
+🖼️ อัปโหลดและแสดงรูปภาพของแคมป์
+
+🧾 ระบบจองและยืนยันการจอง
+
+💳 การชำระเงินผ่าน Stripe Embedded Checkout
+
+🔐 การยืนยันตัวตนและการจัดการผู้ใช้ด้วย Clerk
+
+📦 การจัดการข้อมูลด้วย Prisma ORM และ MySQL
+
+🛠️ การพัฒนาเพิ่มเติม
+เพิ่มระบบรีวิวและคะแนนสำหรับแคมป์
+
+รองรับการจองหลายวัน
+
+ระบบแอดมินสำหรับจัดการแคมป์และการจอง
+
+📄 License
+MIT
