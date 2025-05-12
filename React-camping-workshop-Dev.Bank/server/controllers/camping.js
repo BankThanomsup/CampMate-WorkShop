@@ -29,9 +29,9 @@ exports.readCamping = async(req, res, next) => {
 
 exports.createCamping = async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
+    // console.log("req.body", req.body);
     const{ title, price, description, category,lat,lng,image } = req.body;
-    console.log(image)
+    // console.log(image)
     const{ id } = req.user;
     const camping = await prisma.landmark.create({
       data:{

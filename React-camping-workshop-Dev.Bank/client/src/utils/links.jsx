@@ -6,6 +6,7 @@ export const PublicLinks =[
 
 export const PrivateLinks =[
     {href:'/user/profile',label:'My Profile'},
+    {href:'/user/myorders',label:'My Booking'},
     {href:'/admin/camping',label:'Camping'},
     
 ]

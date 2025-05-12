@@ -10,7 +10,7 @@ cloudinary.config({
 
 exports.CreateImages = async (req, res, next) => {
   try {
-    console.log(req.body.image);
+    // console.log(req.body.image);
     const { image } = req.body;
     const result = await cloudinary.uploader.upload(image, {
       public_id: `${Date.now()}`,

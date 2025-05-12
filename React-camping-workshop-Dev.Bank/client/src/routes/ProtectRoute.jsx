@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const ProtectRoute = ({ el }) => {
   //JS
   const { isLoaded, isSignedIn } = useAuth();
-  console.log(isSignedIn);
+  // console.log(isSignedIn);
   if (!isLoaded) {
     return <h1>Loading...</h1>;
   }

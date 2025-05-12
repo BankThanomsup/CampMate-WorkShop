@@ -3,6 +3,39 @@ const { calToTal } = require("../utils/booking");
 const renderError = require("../utils/renderError");
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+
+exports.listBookings = async(req,res,next)=>{
+  try {
+    const { id } = req.user;
+    console.log(id);
+    const bookings = await prisma.booking.findMany({
+      where:{
+        profileId: id,
+        paymentStatus: true,
+      },
+      include:{
+        landmark:{
+          select:{
+            id:true,
+            title:true,
+          }
+        }
+      },
+      orderBy:{
+        checkIn:"asc"
+      }
+    });
+    //  console.log(bookings);
+    res.json({
+      message: "List of bookings", result: bookings
+    });
+  } catch (error) {
+    next(error);
+    
+  }
+}
+
+
 exports.createBooking = async (req, res, next) => {
   try {
     //Overview
@@ -91,6 +124,7 @@ exports.checkout = async (req, res, next) => {
     //step 2 Stripe
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
+      metadata:{ bookingId:booking.id},
       line_items: [
         {   
             quantity: 1,
@@ -115,3 +149,34 @@ exports.checkout = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.checkoutStatus = async(req,res,next) =>{
+  try {
+    const { session_id } = req.params;
+    const session = await stripe.checkout.sessions.retrieve(session_id);
+
+    const bookingId = session.metadata?.bookingId;
+    console.log(bookingId);
+    //check
+    if(session.status !== 'complete' || !bookingId){
+      return renderError(400,"Payment not completed",res);
+    }
+    //update DB booking
+    console.log(session);
+    const result = await prisma.booking.update({
+      where:{
+        id:Number(bookingId),
+      },
+      data:{
+        paymentStatus : true
+      }
+    });
+
+    res.json({
+      message: "Payment status updated successfully",
+      status:session.status
+    });
+  } catch (error) {
+    next(error);
+  }
+}

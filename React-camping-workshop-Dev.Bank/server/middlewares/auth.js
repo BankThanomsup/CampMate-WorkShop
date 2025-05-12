@@ -12,7 +12,7 @@ exports.authCheck =  async (req, res, next) => {
    
    const user = await clerkClient.users.getUser(userId);
   //  console.log("Hello middle ware"); // Debugging
-   console.log("User:", user); // Debugging
+  //  console.log("User:", user); // Debugging
    req.user = user;
   //  console.log(req.user); // Debugging
    next();

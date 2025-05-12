@@ -7,7 +7,7 @@ function LocationMarker({position , setPosition,setValue}) {
 
     const map = useMapEvents({
       click:(e)=>{
-        console.log(e.latlng)
+        // console.log(e.latlng)
         setPosition(e.latlng)
         map.flyTo(e.latlng)
         if(setValue){
@@ -31,7 +31,7 @@ const MainMap = ({register,location,setValue}) => {
   const DEFAULT_LOCATION =[13 ,100]
 
   const roitai = register && 'ok'
-  console.log(roitai) 
+  // console.log(roitai) 
 
     return (
     
