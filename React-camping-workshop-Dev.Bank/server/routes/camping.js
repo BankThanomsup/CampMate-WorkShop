@@ -7,13 +7,14 @@ const {
   createCamping,
   updateCamping,
   deleteCamping,
+  actionFavorite
 } = require("../controllers/camping");
 const { authCheck } = require("../middlewares/auth");
 
 // @ENDPOINT http://localhost:5000/api/camping
 // @METHOD GET [get list camping]
 // @ACCESS public
-router.get("/camping",listCamping);
+router.get("/campings/:id",listCamping);
 
 // @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD GET [get read camping]
@@ -37,5 +38,13 @@ router.put("/camping/:id", updateCamping);
 // @METHOD DELETE [delete camping]
 // @ACCESS private
 router.delete("/camping/:id", deleteCamping);
+
+
+router.post("/favorite",authCheck, actionFavorite);
+ 
+  
+ 
+
+
 
 module.exports = router;

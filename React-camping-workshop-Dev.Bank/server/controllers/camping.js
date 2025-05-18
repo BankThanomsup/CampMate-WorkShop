@@ -3,11 +3,13 @@ const prisma = require("../config/prisma");
 
 exports.listCamping = async (req, res, next) => {
   try {
+    const { id } = req.params;
+      // console.log(id)
     const campings = await prisma.landmark.findMany({
       include:{
         favorites:{
           where:{
-            profileId: req.user?.id
+            profileId: id
           },
           select:{
             id:true
@@ -23,7 +25,7 @@ exports.listCamping = async (req, res, next) => {
         isFavorite: element.favorites.length > 0 ? true : false,
       }
     })
-    console.log(campingWithlike)
+    // console.log(campingWithlike)
   res.json({result: campingWithlike, message: "Camping list successfully"});
   } catch (err) {
     next(err)
@@ -90,3 +92,36 @@ exports.deleteCamping = async (req, res, next) => {
     next(err);
   }
 };
+
+//Favorite
+exports.actionFavorite = async(req,res,next) =>{
+  try {
+    //code
+    const {campingId, isFavorite} = req.body;
+    const {id} = req.user;
+
+
+    let result
+
+    if(isFavorite){
+      result = await prisma.favorite.deleteMany({
+        where:{
+          profileId: id,
+          landmarkId: campingId 
+        }
+      });
+    }else{
+      result = await prisma.favorite.create({
+        data:{
+          profileId: id,
+          landmarkId: campingId
+        }
+      });
+    }
+
+    res.json({result: result, message: isFavorite ?'Remove favorite'  : 'Add favorite'});
+  } catch (error) {
+    next(error);
+    
+  }
+}
