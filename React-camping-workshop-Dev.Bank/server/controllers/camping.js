@@ -3,9 +3,28 @@ const prisma = require("../config/prisma");
 
 exports.listCamping = async (req, res, next) => {
   try {
-    const campings = await prisma.landmark.findMany()
-    
-  res.json({result: campings, message: "Camping list successfully"});
+    const campings = await prisma.landmark.findMany({
+      include:{
+        favorites:{
+          where:{
+            profileId: req.user?.id
+          },
+          select:{
+            id:true
+          }
+        }
+      }
+    })
+    //console.log(campings);
+    const campingWithlike = campings.map((element)=>{
+
+      return {
+        ...element, 
+        isFavorite: element.favorites.length > 0 ? true : false,
+      }
+    })
+    console.log(campingWithlike)
+  res.json({result: campingWithlike, message: "Camping list successfully"});
   } catch (err) {
     next(err)
   }
@@ -49,6 +68,7 @@ exports.createCamping = async (req, res, next) => {
     res.json({result: camping, message: "Camping created successfully"});
   } 
   catch (err) {
+    console.log(err);
     next(err);
   }
 };

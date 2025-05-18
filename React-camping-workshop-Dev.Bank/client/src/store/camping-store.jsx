@@ -10,7 +10,7 @@ const CreateCampingStore = (set) => ({
         //code
         try {
             const res = await listCamping()
-            // console.log(res.data.result)
+            console.log('This is Zustand',res.data.result)
             set({campings:res.data.result})
         } catch (error) {
             console.log(error);

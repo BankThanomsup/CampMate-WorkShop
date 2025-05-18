@@ -17,7 +17,7 @@ const CampingLists = () => {
         return <CampingCard key={element.id} 
         camping={element}/> 
       })}
-      <div>campingLists</div>
+      {/* <div>campingLists</div> */}
     </section>
   )
 }
