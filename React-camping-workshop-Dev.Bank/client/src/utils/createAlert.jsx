@@ -8,3 +8,13 @@ export const createAlert = (icon,text,timer) => {
       }) 
     
 }
+export const createNotify = (icon,text) => {
+    return Swal.fire({
+  position: "top",
+  icon: icon,
+  title: text,
+  showConfirmButton: false,
+  timer: 1000
+});
+    
+}
