@@ -125,3 +125,27 @@ exports.actionFavorite = async(req,res,next) =>{
     
   }
 }
+exports.listFavorites = async(req,res,next)=>{
+  try {
+    const{id} = req.user;
+    const favorites = await prisma.favorite.findMany({
+      where:{
+        profileId:id
+      },
+      include:{ landmark:true }
+    });
+
+    const favoriteWithLike = favorites.map((item)=>{
+      return {...item,
+        landmark:{
+          ...item.landmark ,
+          isFavorite: true
+        }
+      };
+    })
+    // console.log(favoriteWithLike)
+    res.json({message:'success', result:favoriteWithLike})
+  } catch (error) {
+    next(error);
+  }
+}

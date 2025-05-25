@@ -14,6 +14,7 @@ import ProtectRoute from "./ProtectRoute";
 import Checkout from "@/pages/user/Checkout";
 import CheckoutComplete from "@/pages/user/CheckoutComplete";
 import MyOrders from "@/pages/user/MyOrders";
+import MyFavorites from "@/pages/user/MyFavorites";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <Route path="checkout/:id" element={<Checkout />} />
           <Route path="complete/:session" element={<CheckoutComplete />} />
           <Route path="myorders" element={<MyOrders />} />
+          <Route path="my-favorites" element={<MyFavorites />} />
           
         </Route>
 

@@ -7,7 +7,8 @@ const {
   createCamping,
   updateCamping,
   deleteCamping,
-  actionFavorite
+  actionFavorite,
+  listFavorites
 } = require("../controllers/camping");
 const { authCheck } = require("../middlewares/auth");
 
@@ -43,7 +44,7 @@ router.delete("/camping/:id", deleteCamping);
 router.post("/favorite",authCheck, actionFavorite);
  
   
- 
+router.get("/favorites",authCheck, listFavorites);
 
 
 
