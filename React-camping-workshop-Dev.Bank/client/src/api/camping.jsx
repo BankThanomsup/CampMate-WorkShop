@@ -36,3 +36,8 @@ export const listFavorites =(token)=>{
         }
     })  
 }
+
+//Filter
+export const filterCamping =(category,search)=>{
+    return  axios.get(`http://localhost:5000/api/filter-camping?category=${category}&search=${search}`)  
+}

@@ -8,7 +8,8 @@ const {
   updateCamping,
   deleteCamping,
   actionFavorite,
-  listFavorites
+  listFavorites,
+  filterCamping
 } = require("../controllers/camping");
 const { authCheck } = require("../middlewares/auth");
 
@@ -46,6 +47,7 @@ router.post("/favorite",authCheck, actionFavorite);
   
 router.get("/favorites",authCheck, listFavorites);
 
-
+  
+router.get("/filter-camping", filterCamping);
 
 module.exports = router;
