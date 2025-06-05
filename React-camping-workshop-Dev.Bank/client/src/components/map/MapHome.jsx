@@ -1,6 +1,24 @@
 
-import { MapContainer } from "react-leaflet";
+import { MapContainer, useMap } from "react-leaflet";
 import Layers from "./Layers";
+import useCampingStore from "@/store/camping-store";
+
+const MyCenter =( ) =>{
+
+  const center = useCampingStore((state) => state.center)
+  // console.log(center)
+  const map = useMap()
+  if(!center){
+    return null;
+  }
+
+  map.flyTo(center,8)
+
+  return null;
+}
+
+
+
 
 const MapHome = () => {
  
@@ -15,7 +33,7 @@ const MapHome = () => {
       >
 
         <Layers />
-
+      <MyCenter />
       </MapContainer>
     </div>
   );

@@ -11,12 +11,13 @@ import { create } from "zustand";
 const CreateCampingStore = (set, get) => ({
   campings: [],
   favorites: [],
+  center: null,
   actionListCamping: async (id) => {
     //code
     try {
       const res = await listCamping(id);
       // console.log('This is Zustand',res.data.result)
-      set({ campings: res.data.result });
+      set({ campings: res.data.result , center: res.data.center });
     } catch (error) {
       console.log(error);
     }
@@ -65,8 +66,8 @@ const CreateCampingStore = (set, get) => ({
   actionFilter: async (category = "", search = "") => {
     try {
       const res = await filterCamping(category, search);
-      console.log("This is Zustand",res.data.result);
-      set({campings:res.data.result})
+      console.log("This is Zustand",res.data);
+      set({campings:res.data.result , center: res.data.center})
     } catch (error) {
       console.log(error);
     }
