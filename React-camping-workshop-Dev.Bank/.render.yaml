@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: camping-server
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        value: mysql://avnadmin:AVNS_eSusyFHHP7WNYd6VuiI@camping-bankthanomsups-projects.f.aivencloud.com:26831/defaultdb?ssl-mode=REQUIRED
