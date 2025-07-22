@@ -10,10 +10,10 @@ const { clerkMiddleware } = require ("@clerk/express")
 const cookieParser = require('cookie-parser');
 
 //middleware
+app.use(cookieParser());
 app.use(cors());  //ติดไว้ก่อน
 app.use(express.json({limit:'10mb'}))
 app.use(morgan('dev'))
-app.use(cookieParser());
 // middleware
 app.use(clerkMiddleware());
 readdirSync('./routes').map((e)=>app.use('/api',require(`./routes/${e}`)))
