@@ -1,6 +1,6 @@
 import useCampingStore from "@/store/camping-store";
 import MapHome from "../map/MapHome";
-import CampingLists from "./CampingLists";
+import CampingLists from "./campingLists";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
 import CategoryLists from "./CategoryLists";
