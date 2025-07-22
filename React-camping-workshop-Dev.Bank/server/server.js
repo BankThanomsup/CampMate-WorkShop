@@ -11,7 +11,10 @@ const cookieParser = require('cookie-parser');
 
 //middleware
 app.use(cookieParser());
-app.use(cors());  //ติดไว้ก่อน
+app.use(cors({
+  origin: 'https://react-camping-470y4ooot-bankthanomsups-projects.vercel.app', // กำหนดให้ชัดเจน
+  credentials: true,
+}));
 app.use(express.json({limit:'10mb'}))
 app.use(morgan('dev'))
 // middleware
