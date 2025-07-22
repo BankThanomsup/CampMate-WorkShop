@@ -7,7 +7,7 @@ import {
 
 import { calToTal } from "@/utils/Booking";
 import { formatNumber } from "@/utils/formats";
-import BookingConFirm from "./BookingConFirm";
+import BookingConFirm from "./BookingConfirm";
 
 
 
