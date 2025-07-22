@@ -6,7 +6,6 @@ const {readdirSync} =require('fs')
 const morgan = require('morgan');
 const handleErrors = require('./middlewares/error');
 require('dotenv/config')
-require('cookie')
 const { clerkMiddleware } = require ("@clerk/express")
 const cookie = require("cookie");
 //middleware
