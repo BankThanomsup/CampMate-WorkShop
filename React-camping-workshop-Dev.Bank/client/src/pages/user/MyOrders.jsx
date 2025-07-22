@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate, formatNumber } from "@/utils/formats";
-import BookingPDF from "@/components/booking/bookingPDF";
+import BookingPDF from "@/components/booking/BookingPDF";
 
 const MyOrders = () => {
   //JS
