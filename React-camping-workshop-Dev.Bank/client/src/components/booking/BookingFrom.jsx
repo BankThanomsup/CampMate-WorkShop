@@ -11,10 +11,6 @@ import BookingConFirm from "./BookingConfirm";
 
 
 
-
-
-
-
 const BookingFrom = () => {
     const price =useBookingStore((state)=>state.price);
     const range = useBookingStore((state)=>state.range)
