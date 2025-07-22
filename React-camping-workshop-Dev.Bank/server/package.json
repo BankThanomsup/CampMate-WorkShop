@@ -13,6 +13,7 @@
   "dependencies": {
     "@clerk/express": "^1.4.5",
     "@prisma/client": "^6.6.0",
+    "prisma": "^6.12.0",
     "@turf/turf": "^7.2.0",
     "cloudinary": "^2.6.0",
     "cookie": "^0.6.0",
@@ -23,7 +24,6 @@
     "stripe": "^18.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10",
-    "prisma": "^6.12.0"
+    "nodemon": "^3.1.10"
   }
 }
