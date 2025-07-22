@@ -3,7 +3,7 @@ import axios from "axios";
 import { readCamping } from "@/api/camping";
 import { useEffect, useState } from "react";
 import Breadcrumbs from "@/components/campingDetail/Breadcrumbs";
-import ImageContainer from "@/components/campingDetail/imageContainer";
+import ImageContainer from "@/components/campingDetail/ImageContainer";
 import Description from "@/components/campingDetail/Description";
 import MainMap from "@/components/map/MainMap";
 import BookingContainer from "@/components/booking/BookingContainer";
