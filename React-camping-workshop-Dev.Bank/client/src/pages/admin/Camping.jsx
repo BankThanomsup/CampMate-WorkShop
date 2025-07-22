@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { campingSchema } from "@/utils/schema";
 import Buttons from "@/components/form/Buttons";
-import CategoryInput from "@/components/form/Categoryinput";
-import MainMap from "@/components/map/Mainmap";
+import CategoryInput from "@/components/form/CategoryInput";
+import MainMap from "@/components/map/MainMap";
 import { useAuth } from '@clerk/clerk-react'
 import { createCamping } from "@/api/camping";
-import FromUploadimage from "@/components/form/FromUploadimage";
+import FromUploadimage from "@/components/form/FromUploadImage";
 import { createAlert } from "@/utils/createAlert";
 
 const Camping = () => {
