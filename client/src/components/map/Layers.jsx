@@ -1,8 +1,8 @@
 
-
-
 import useCampingStore from "@/store/camping-store";
 import { TileLayer, Marker, Popup, LayersControl, LayerGroup, Tooltip } from "react-leaflet";
+import '@/utils/leafletConfig';
+
 const Layers = () => {
   const campings = useCampingStore((state) => state.campings);
 

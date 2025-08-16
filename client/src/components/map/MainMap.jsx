@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, useMap, useMapEvents,Marker,Popup } from "react-leaflet";
 import 'leaflet/dist/leaflet.css'
+import '@/utils/leafletConfig';
 import { boolean } from "zod";
 
 function LocationMarker({position , setPosition,setValue}) {

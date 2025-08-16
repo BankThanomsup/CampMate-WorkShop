@@ -1,6 +1,18 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
+if (!API_URL) {
+    console.error("VITE_API_URL environment variable is not set");
+}
+
+export const getBookings =async (token )=>{
+
+    return await axios.get(`${API_URL}/api/bookings`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+    });
+}
 
 export const listBookings =async (token)=>{
 

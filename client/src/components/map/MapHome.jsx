@@ -2,6 +2,8 @@
 import { MapContainer, useMap } from "react-leaflet";
 import Layers from "./Layers";
 import useCampingStore from "@/store/camping-store";
+import 'leaflet/dist/leaflet.css';
+import '@/utils/leafletConfig';
 
 const MyCenter =( ) =>{
 
