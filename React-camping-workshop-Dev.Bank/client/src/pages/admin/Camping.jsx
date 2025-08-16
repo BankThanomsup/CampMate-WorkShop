@@ -26,7 +26,7 @@ const Camping = () => {
   const hdlSubmit = async (data) => {
     await new Promise((resolve)=>setTimeout(resolve,1000))
     const token = await getToken()
-    // console.log(data);
+    console.log(data);
     createCamping(token,data)
     .then((res)=>{
       // console.log(res.data);

@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({
-  origin: 'https://react-camping-470y4ooot-bankthanomsups-projects.vercel.app', // กำหนดให้ชัดเจน
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://react-camping-470y4ooot-bankthanomsups-projects.vercel.app'],
   credentials: true,
 }));
 app.use(express.json({limit:'10mb'}))
