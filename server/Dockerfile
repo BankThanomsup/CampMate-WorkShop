@@ -1,5 +1,6 @@
 # --- Build stage ---
-FROM node:18 AS build
+# Use a full Node image for dependency resolution and caching
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -14,17 +15,27 @@ COPY . .
 RUN npx prisma generate
 
 # --- Run stage ---
-FROM node:18-slim
+# Use Debian-based slim image and install OpenSSL (required by Prisma)
+FROM node:20-bookworm-slim
 
 WORKDIR /app
 
-# Copy from build
+# Install OpenSSL and certificates (fix Prisma libssl/openssl error)
+RUN apt-get update -y \
+	&& apt-get install -y --no-install-recommends openssl ca-certificates \
+	&& rm -rf /var/lib/apt/lists/*
+
+# Copy built app sources
 COPY --from=build /app /app
 
 # Install only production deps
 RUN npm install --omit=dev
 
+# Generate Prisma Client in the final environment to match OS/openssl
+RUN npx prisma generate
+
 # Expose port (change if needed)
-EXPOSE 3000
+ENV NODE_ENV=production
+EXPOSE 5000
 
 CMD ["npm", "start"]
