@@ -15,7 +15,15 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://react-camping-470y4ooot-bankthanomsups-projects.vercel.app'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:5174', 
+    'https://react-camping-470y4ooot-bankthanomsups-projects.vercel.app',
+    'https://react-camping-workshop.vercel.app',
+    'https://react-camping-workshop-*.vercel.app',
+    'https://react-camping-1abs4moae-bankthanomsups-projects.vercel.app', // จาก error ที่เห็น
+    'https://*.vercel.app' // รองรับ Vercel domains ทั้งหมด
+  ],
   credentials: true,
 }));
 app.use(express.json({limit:'10mb'}))
