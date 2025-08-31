@@ -23,7 +23,7 @@ const fetchPayment = async () => {
       const res = await checkOutStatus(token,session)
       setStatus(res.data.status)
       createAlert('success',res.data.message)
-      if (res.data.status === 'completed') {
+      if (res.data.status === 'complete') {
         navigate('/user/myorders');      
       }
     } catch (error) {
