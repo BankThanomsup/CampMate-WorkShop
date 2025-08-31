@@ -122,6 +122,8 @@ exports.checkout = async (req, res, next) => {
     const { title, secure_url } = landmark;
 
     //step 2 Stripe
+    const clientUrl = process.env.CLIENT_URL || 'https://react-camping.vercel.app';
+
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
       metadata:{ bookingId:booking.id},
@@ -139,8 +141,9 @@ exports.checkout = async (req, res, next) => {
             }
         },
       ],
-      mode: "payment",
-      return_url: `http://localhost:5173/user/complete/{CHECKOUT_SESSION_ID}`,
+  mode: "payment",
+  // ensure no trailing slash duplication
+  return_url: `${clientUrl.replace(/\/$/, '')}/user/complete/{CHECKOUT_SESSION_ID}`,
     });
 
     //   console.log(total, totalNights,checkIn, checkOut, landmark,title,secure_url);
