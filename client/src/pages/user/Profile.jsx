@@ -5,7 +5,8 @@ import FormInputs from "@/components/form/FormInputs";
 import Buttons from "@/components/form/Buttons";
 import { profileSchema } from "@/utils/schema";
 import {createProfile} from "@/api/profile";
-
+import FromUploadimage from "@/components/form/FromUploadImage";
+import { createAlert } from "@/utils/createAlert";
 //clerk
 import { useAuth } from '@clerk/clerk-react'
   //javascript
@@ -28,6 +29,7 @@ const Profile = () => {
       createProfile(token,data)
       .then((res)=>{
         // console.log(res.data);
+        createAlert("success","Create Profile Success",2000)
       })
       .catch((err)=>{
         console.log(err);

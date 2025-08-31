@@ -6,7 +6,7 @@ import { useAuth } from "@clerk/clerk-react"
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate, useParams } from "react-router"
 
-const CheckoutComplete = () => {
+const  CheckoutComplete = () => {
   const navigate = useNavigate();
   const {session} = useParams()
   const { getToken } = useAuth()

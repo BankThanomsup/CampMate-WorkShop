@@ -4,8 +4,8 @@ import { Link } from 'react-router'
 
 const Logo = () => {
   return (
-    <Button asChild>
-        <Link to="/">Logo</Link>
+    <Button asChild >
+        <Link to="/">CampMate</Link>
     </Button>
   )
 }

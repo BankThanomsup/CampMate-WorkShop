@@ -31,7 +31,7 @@ const Camping = () => {
     .then((res)=>{
       // console.log(res.data);
       // reset();
-      createAlert("success","Create Landmark Suscess",2000)
+      createAlert("success","Create Landmark Success",2000)
     })
     .catch((err)=>{
 
