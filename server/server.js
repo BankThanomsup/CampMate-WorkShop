@@ -20,7 +20,6 @@ app.use(cors({
     'http://localhost:5174', 
     'https://react-camping-bankthanomsups-projects.vercel.app',
     'https://react-camping.vercel.app',
-    'https://react-camping-git-main-bankthanomsups-projects.vercel.app',
   ],
   credentials: true,
 }));

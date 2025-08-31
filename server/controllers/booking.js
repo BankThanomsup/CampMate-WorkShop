@@ -140,7 +140,7 @@ exports.checkout = async (req, res, next) => {
         },
       ],
       mode: "payment",
-      return_url: `https://react-camping.vercel.app/user/complete/${CHECKOUT_SESSION_ID}`,
+      return_url: `https://react-camping.vercel.app/user/complete/{CHECKOUT_SESSION_ID}`,
     });
 
     //   console.log(total, totalNights,checkIn, checkOut, landmark,title,secure_url);
