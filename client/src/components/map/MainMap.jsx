@@ -8,10 +8,13 @@ import { Search, MapPin } from "lucide-react";
 import { boolean } from "zod";
 import useCampingStore from "@/store/camping-store";
 
-function LocationMarker({position , setPosition,setValue}) {
+function LocationMarker({position , setPosition,setValue, readonly = false}) {
 
     const map = useMapEvents({
       click:(e)=>{
+        // ถ้าเป็น readonly mode ไม่ให้ปักหมุดได้
+        if (readonly) return;
+        
         // console.log(e.latlng)
         setPosition(e.latlng)
         map.flyTo(e.latlng)
@@ -41,7 +44,7 @@ function LocationMarker({position , setPosition,setValue}) {
     )
   }
 
-const MainMap = ({register,location,setValue}) => {
+const MainMap = ({register,location,setValue, showSearch = false, readonly = false}) => {
     //javascript
   const [position, setPosition] = useState(null)
   const [searchQuery, setSearchQuery] = useState("")
@@ -167,6 +170,65 @@ const MainMap = ({register,location,setValue}) => {
             </>
         }
         
+        {/* Search Input Container */}
+        {showSearch && (
+        <div className="relative mb-4">
+          <div className="flex gap-2">
+            <div className="flex-1 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                type="text"
+                placeholder="ค้นหาสถานที่ เช่น กรุงเทพ, เชียงใหม่, หรือชื่อถนน..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              
+              {/* Search Results Dropdown */}
+              {showResults && searchResults.length > 0 && (
+                <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                  {searchResults.map((result, index) => (
+                    <div
+                      key={index}
+                      onClick={() => selectLocation(result)}
+                      className="p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                    >
+                      <div className="flex items-start gap-2">
+                        <MapPin className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate">
+                            {result.display_name}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            📍 {parseFloat(result.lat).toFixed(4)}, {parseFloat(result.lon).toFixed(4)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {/* Loading State */}
+              {isSearching && (
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* No Results Message */}
+          {showResults && searchResults.length === 0 && searchQuery.trim().length > 2 && !isSearching && (
+            <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-3">
+              <p className="text-sm text-gray-500 text-center">
+                ไม่พบสถานที่ที่ค้นหา
+              </p>
+            </div>
+          )}
+        </div>
+        )}
+        
         {
             position && <p className="text-sm text-gray-600 mb-2">
                 <MapPin className="inline h-4 w-4 mr-1" />
@@ -175,7 +237,7 @@ const MainMap = ({register,location,setValue}) => {
         }
         
       <MapContainer
-      className="h-[50vh] rounded-md z-0"
+      className={`h-[50vh] rounded-md z-0 ${readonly ? 'cursor-default' : 'cursor-crosshair'}`}
      center={mapCenter} 
       zoom={location ? 10 : 7} 
       scrollWheelZoom={true}>
@@ -246,7 +308,7 @@ const MainMap = ({register,location,setValue}) => {
           </LayersControl.Overlay>
         </LayersControl>
         
-        <LocationMarker position={position} setPosition={setPosition} setValue={setValue}/>
+        <LocationMarker position={position} setPosition={setPosition} setValue={setValue} readonly={readonly}/>
       </MapContainer>
     </div>
   );

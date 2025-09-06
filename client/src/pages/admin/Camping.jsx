@@ -52,7 +52,7 @@ const Camping = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 transition-colors duration-300">
       {/* แอนิเมชั่นพลุ */}
       <Confetti 
         isActive={showConfetti} 
@@ -62,38 +62,38 @@ const Camping = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full mb-4 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-600 to-blue-600 dark:from-green-500 dark:to-blue-500 rounded-full mb-4 shadow-lg transition-all duration-300">
             <Tent className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
             Create New Camping Site
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Add a new camping location to your platform. Fill in all the details to create an amazing camping experience.
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors duration-300">
+            เพิ่มสถานที่แคมป์ปิ้งใหม่ กรอกข้อมูลให้ครบถ้วนเพื่อสร้างประสบการณ์แคมป์ปิ้งที่ยอดเยี่ยม
           </p>
         </div>
 
         {/* Main Form Card */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 transition-all duration-300">
           <div className="p-8">
             <form onSubmit={handleSubmit(hdlSubmit)} className="space-y-12">
               
               {/* Basic Information Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-                  <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-green-100 rounded-lg flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-blue-600" />
+                <div className="flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-100 to-green-100 dark:from-blue-900/30 dark:to-green-900/30 rounded-lg flex items-center justify-center transition-colors duration-300">
+                    <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
-                    <p className="text-sm text-gray-500">Essential details about your camping site</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">Basic information</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">ข้อมูลสำคัญเกี่ยวกับสถานที่แคมป์ปิ้งของคุณ</p>
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-3">
-                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <Tent className="w-4 h-4 text-green-500" />
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors duration-300">
+                      <Tent className="w-4 h-4 text-green-500 dark:text-green-400" />
                       Camping Site Title
                     </label>
                     <FormInputs
@@ -106,8 +106,8 @@ const Camping = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <DollarSign className="w-4 h-4 text-yellow-500" />
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors duration-300">
+                      <DollarSign className="w-4 h-4 text-yellow-500 dark:text-yellow-400" />
                       Price per Night (฿)
                     </label>
                     <FormInputs
@@ -121,8 +121,8 @@ const Camping = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-blue-500" />
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors duration-300">
+                    <FileText className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                     Description
                   </label>
                   <TextAreaInput
@@ -137,28 +137,28 @@ const Camping = () => {
 
               {/* Category and Media Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg flex items-center justify-center">
-                    <Tag className="w-5 h-5 text-purple-600" />
+                <div className="flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-lg flex items-center justify-center transition-colors duration-300">
+                    <Tag className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">Category & Media</h2>
-                    <p className="text-sm text-gray-500">Categorize your site and add images</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">Category and images</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">จัดหมวดหมู่สถานที่และเพิ่มรูปภาพ</p>
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12">
                   <div className="space-y-4">
-                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <Tag className="w-4 h-4 text-purple-500" />
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors duration-300">
+                      <Tag className="w-4 h-4 text-purple-500 dark:text-purple-400" />
                       Category
                     </label>
                     <CategoryInput name="category" register={register} setValue={setValue}/>
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                      <Image className="w-4 h-4 text-pink-500" />
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors duration-300">
+                      <Image className="w-4 h-4 text-pink-500 dark:text-pink-400" />
                       Upload Images
                     </label>
                     <FromUploadimage setValue={setValue}/>
@@ -168,23 +168,23 @@ const Camping = () => {
 
               {/* Location Section */}
               <div className="space-y-6">
-                <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
-                  <div className="w-10 h-10 bg-gradient-to-r from-red-100 to-orange-100 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-red-600" />
+                <div className="flex items-center gap-3 pb-4 border-b border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                  <div className="w-10 h-10 bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/30 dark:to-orange-900/30 rounded-lg flex items-center justify-center transition-colors duration-300">
+                    <MapPin className="w-5 h-5 text-red-600 dark:text-red-400" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-gray-900">Location</h2>
-                    <p className="text-sm text-gray-500">Pin the exact location on the map</p>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">Location</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">กดเลือกตำแหน่งบนแผนที่</p>
                   </div>
                 </div>
 
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <MainMap name="" register={register} setValue={setValue} />
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 transition-colors duration-300">
+                  <MainMap name="" register={register} setValue={setValue} showSearch={true} />
                 </div>
               </div>
 
               {/* Submit Button */}
-              <div className="pt-8 border-t border-gray-100">
+              <div className="pt-8 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
                 <Buttons 
                   text={isSubmitting ? "Creating Camping Site..." : "Create Camping Site"} 
                   isPending={isSubmitting} 
@@ -196,8 +196,8 @@ const Camping = () => {
 
         {/* Footer Info */}
         <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">
-            Make sure all information is accurate before submitting. You can edit these details later.
+          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
+            ตรวจสอบข้อมูลให้ถูกต้องก่อนส่ง สามารถแก้ไขรายละเอียดเหล่านี้ได้ภายหลัง
           </p>
         </div>
       </div>

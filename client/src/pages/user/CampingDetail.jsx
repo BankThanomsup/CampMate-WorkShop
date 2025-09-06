@@ -67,7 +67,7 @@ function CampingDetail() {
               <span className="text-xl">📍</span>
               <h2 className="text-2xl font-semibold text-gray-900">ตำแหน่งที่ตั้ง</h2>
             </div>
-            <MainMap location={[camping.lat, camping.lng]}/>
+            <MainMap location={[camping.lat, camping.lng]} readonly={true}/>
           </div>
         )}
       </div>
