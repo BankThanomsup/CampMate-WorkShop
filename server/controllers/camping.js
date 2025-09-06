@@ -52,6 +52,33 @@ exports.readCamping = async(req, res, next) => {
   }
 };
 
+// ดึงข้อมูล bookings ของ camping site ที่ระบุ
+exports.getCampingBookings = async(req, res, next) => {
+  try {
+    const { id } = req.params;
+    
+    const bookings = await prisma.booking.findMany({
+      where:{
+        campingId: Number(id),
+        status: {
+          in: ['confirmed', 'paid'] // เฉพาะการจองที่ยืนยันแล้วหรือชำระเงินแล้ว
+        }
+      },
+      select: {
+        id: true,
+        checkIn: true,
+        checkOut: true,
+        status: true,
+        campingId: true
+      }
+    });
+    
+    res.json(bookings);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.createCamping = async (req, res, next) => {
   try {
     console.log("req.body", req.body);

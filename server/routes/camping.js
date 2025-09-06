@@ -9,7 +9,8 @@ const {
   deleteCamping,
   actionFavorite,
   listFavorites,
-  filterCamping
+  filterCamping,
+  getCampingBookings
 } = require("../controllers/camping");
 const { authCheck } = require("../middlewares/auth");
 
@@ -22,6 +23,11 @@ router.get("/campings/:id",listCamping);
 // @METHOD GET [get read camping]
 // @ACCESS public
 router.get("/camping/:id",readCamping);
+
+// @ENDPOINT http://localhost:5000/api/camping/1/bookings
+// @METHOD GET [get camping bookings]
+// @ACCESS public
+router.get("/camping/:id/bookings", getCampingBookings);
 
 
 

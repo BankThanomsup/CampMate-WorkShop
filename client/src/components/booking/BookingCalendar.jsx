@@ -11,6 +11,8 @@ const BookingCalendar = () => {
   const [range, setRange] = useState(defaultSelected);
   const { bookings } = useBookingStore();
   
+  console.log("BookingCalendar received bookings:", bookings);
+  
   // วันปัจจุบัน (เริ่มต้นของวัน)
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -19,9 +21,12 @@ const BookingCalendar = () => {
   const bookedDates = [];
   if (bookings && bookings.length > 0) {
     bookings.forEach(booking => {
+      console.log("Processing booking:", booking);
       if (booking.checkIn && booking.checkOut) {
         const checkIn = new Date(booking.checkIn);
         const checkOut = new Date(booking.checkOut);
+        
+        console.log("Check-in:", checkIn, "Check-out:", checkOut);
         
         // เพิ่มทุกวันในช่วงที่ถูกจอง
         for (let date = new Date(checkIn); date < checkOut; date.setDate(date.getDate() + 1)) {
@@ -30,6 +35,8 @@ const BookingCalendar = () => {
       }
     });
   }
+  
+  console.log("Booked dates:", bookedDates);
   
   // วันที่ไม่สามารถเลือกได้
   const disabledDays = [

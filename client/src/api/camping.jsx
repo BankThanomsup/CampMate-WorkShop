@@ -21,6 +21,11 @@ export const readCamping = async (id) => {
     return await axios.get(`${API_URL}/api/camping/${id}`)
 }
 
+// ดึงข้อมูล bookings ของ camping site ที่ระบุ
+export const getCampingBookings = async (campingId) => {
+    return await axios.get(`${API_URL}/api/camping/${campingId}/bookings`)
+}
+
 
 
 
