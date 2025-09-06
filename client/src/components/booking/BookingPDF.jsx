@@ -67,7 +67,7 @@ const BookingInvoice = ({ booking }) => (
     <Page size="A4" style={styles.page}>
       {/* Invoice */}
       <View style={styles.section}>
-        <Text style={styles.header}>รอยไถ พัฒนา</Text>
+        <Text style={styles.header}>CampMate - ระบบจองแคมป์ปิ้ง</Text>
         <Text>รหัสการจอง: {booking.id}</Text>
         <Text>ชื่อที่พัก: {booking.landmark.title}</Text>
         <Text>วันที่ออกใบเสร็จ: {formatDate(new Date())}</Text>

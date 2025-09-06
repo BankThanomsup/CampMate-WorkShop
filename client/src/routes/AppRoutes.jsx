@@ -15,6 +15,9 @@ import Checkout from "@/pages/user/Checkout";
 import CheckoutComplete from "@/pages/user/CheckoutComplete";
 import MyOrders from "@/pages/user/MyOrders";
 import MyFavorites from "@/pages/user/MyFavorites";
+import MyReservations from "@/pages/user/MyReservations";
+import MyCampings from "@/pages/user/MyCampings";
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -33,7 +36,9 @@ const AppRoutes = () => {
           <Route path="complete/:session" element={<CheckoutComplete />} />
           <Route path="myorders" element={<MyOrders />} />
           <Route path="my-favorites" element={<MyFavorites />} />
-          
+          <Route path="my-reservations" element={<MyReservations />} />
+          <Route path="my-campings" element={<MyCampings />} />
+
         </Route>
 
 

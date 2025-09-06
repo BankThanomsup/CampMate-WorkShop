@@ -39,8 +39,8 @@ const DropdownListMenu = () => {
             //code body javascript
             //return 1 element
             return (
-              <DropdownMenuItem key={index}>
-                <Link to={item.href}>{item.label}</Link>
+              <DropdownMenuItem key={index} asChild>
+                <Link to={item.href} className="w-full">{item.label}</Link>
               </DropdownMenuItem>
             );
           })}
@@ -66,8 +66,8 @@ const DropdownListMenu = () => {
             //code body javascript
             //return 1 element
             return (
-              <DropdownMenuItem key={index}>
-                <Link to={item.href}>{item.label}</Link>
+              <DropdownMenuItem key={index} asChild>
+                <Link to={item.href} className="w-full">{item.label}</Link>
               </DropdownMenuItem>
             );
           })}

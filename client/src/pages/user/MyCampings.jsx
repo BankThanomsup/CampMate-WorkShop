@@ -1,4 +1,4 @@
-import { listBookings } from "@/api/booking";
+import { listMyCampings } from "@/api/admin";
 import { useAuth } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import {
@@ -13,28 +13,28 @@ import {
 import { formatDate, formatNumber } from "@/utils/formats";
 import BookingPDF from "@/components/booking/BookingPDF";
 
-const MyOrders = () => {
+const MyCampings = () => {
   //JS
   const { getToken } = useAuth();
-  const [booking, setBookings] = useState([]);
+  const [campings, setCampings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
   useEffect(() => {
-    fetchBooking();
+    fetchCampings();
   }, []);
 
-  const fetchBooking = async () => {
+  const fetchCampings = async () => {
     const token = await getToken();
     try {
       setLoading(true);
       setError(null);
-      const res = await listBookings(token);
-      setBookings(res.data.result || []);
+      const res = await listMyCampings(token);
+      setCampings(res.data.result || []);
     } catch (error) {
       console.log(error);
-      setError("ไม่สามารถโหลดข้อมูลการจองได้");
-      setBookings([]);
+      setError("ไม่สามารถโหลดข้อมูลแคมป์ปิ้งได้");
+      setCampings([]);
     } finally {
       setLoading(false);
     }
@@ -45,7 +45,7 @@ const MyOrders = () => {
       {/* Header with total count */}
       <div className="mb-4">
         <h1>
-          Total Orders : {booking?.length || 0}
+          Total Campings : {campings?.length || 0}
         </h1>
       </div>
 
@@ -66,34 +66,26 @@ const MyOrders = () => {
       {/* Table - only show when not loading and no error */}
       {!loading && !error && (
         <Table>
-        <TableCaption>รายการการจองของคุณ</TableCaption>
+        <TableCaption>รายการแคมป์ปิ้งของคุณ</TableCaption>
 
         <TableHeader>
           <TableRow>
-            <TableHead>รหัสการจอง</TableHead>
+            <TableHead>รหัส</TableHead>
             <TableHead>ชื่อ</TableHead>
-            <TableHead>จำนวนคืน</TableHead>
-            <TableHead>ราคารวม</TableHead>
-            <TableHead>Check In</TableHead>
-            <TableHead>Check Out</TableHead>
-            <TableHead>Invoice</TableHead>
+            <TableHead>ราคา/คืน</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-        {booking?.map((item) => {
-            const{id,total,totalNights,checkIn,checkOut} = item;
-            const {title} = item.landmark;
+        {campings?.map((item) => {
+            const{id, title, price, category, createdAt} = item;
+            {/* const {title} = item.landmark; */}
             {/* console.log(item); */}
           return ( 
             <TableRow key={id}>
               <TableCell>{id}</TableCell>
               <TableCell>{title}</TableCell>
-              <TableCell>{totalNights}</TableCell>
-              <TableCell>{formatNumber(total)}</TableCell>
-              <TableCell>{formatDate(checkIn)}</TableCell>
-              <TableCell>{formatDate(checkOut)}</TableCell>
-              <TableCell><BookingPDF booking={item} /></TableCell>
+              <TableCell>{formatNumber(price)}</TableCell>
             </TableRow>
           );
         })}
@@ -104,4 +96,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default MyCampings;
