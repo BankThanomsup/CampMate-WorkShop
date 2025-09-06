@@ -8,10 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { listAllReservations } from "@/api/admin";
+import { listUserReservations } from "@/api/admin";
 import { useAuth } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import { formatDate, formatNumber } from "@/utils/formats";
+import MiniLoadingSpinner from "@/components/ui/MiniLoadingSpinner";
 
 const MyReservations = () => {
   //JS
@@ -29,7 +30,7 @@ const MyReservations = () => {
     try {
       setLoading(true);
       setError(null);
-      const res = await listAllReservations(token);
+      const res = await listUserReservations(token);
       console.log(res);
       setReservations(res.data.result || []);
     } catch (error) {
@@ -43,7 +44,7 @@ const MyReservations = () => {
 
   return (
     <div>
-      <ReservationsContainer />
+      <ReservationsContainer showLoading={false} useUserStats={true} />
 
       {/* Table */}
       <div className="mt-8">
@@ -52,9 +53,11 @@ const MyReservations = () => {
         </h1>
         
         {loading && (
-          <div className="text-center py-4">
-            <p>Loading...</p>
-          </div>
+          <MiniLoadingSpinner 
+            size="medium"
+            title="กำลังโหลดข้อมูลการจอง"
+            description="โปรดรอสักครู่ขณะที่เราดึงข้อมูลการจองทั้งหมด..."
+          />
         )}
         
         {error && (

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { formatDate, formatNumber } from "@/utils/formats";
 import BookingPDF from "@/components/booking/BookingPDF";
+import MiniLoadingSpinner from "@/components/ui/MiniLoadingSpinner";
 
 const MyOrders = () => {
   //JS
@@ -51,9 +52,11 @@ const MyOrders = () => {
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-4">
-          <p>Loading...</p>
-        </div>
+        <MiniLoadingSpinner 
+          size="medium"
+          title="กำลังโหลดข้อมูลการจอง"
+          description="โปรดรอสักครู่ขณะที่เราดึงข้อมูลการจองของคุณ..."
+        />
       )}
       
       {/* Error State */}

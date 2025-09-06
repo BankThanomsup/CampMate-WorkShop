@@ -52,3 +52,21 @@ export const listMyCampings  = async (token)=>{
         },
     });
 }
+
+export const listUserReservationStats = async (token)=>{
+
+    return await axios.get(`${API_URL}/api/user-reservation-stats`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+    });
+}
+
+export const listUserReservations = async (token)=>{
+
+    return await axios.get(`${API_URL}/api/user-reservations`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+    });
+}

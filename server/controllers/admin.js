@@ -88,6 +88,70 @@ exports.listAllReservations = async (req, res, next) => {
   }
 };
 
+// API สำหรับสถิติการจองของ user (ไม่ใช่เป็น owner)
+exports.listUserReservationStats = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+
+    // นับจำนวนการจอง
+    const reservationCount = await prisma.booking.count({
+      where: {
+        profileId: id,
+        paymentStatus: true,
+      },
+    });
+
+    // รวมจำนวนคืนและยอดเงิน
+    const totals = await prisma.booking.aggregate({
+      where: {
+        profileId: id,
+        paymentStatus: true,
+      },
+      _sum: {
+        totalNights: true,
+        total: true,
+      },
+    });
+
+    res.json({
+      campings: reservationCount, 
+      nights: totals._sum.totalNights || 0,
+      totals: totals._sum.total || 0,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// API สำหรับรายการการจองของ user (ไม่ใช่เป็น owner)
+exports.listUserReservations = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+    const reservations = await prisma.booking.findMany({
+      where: {
+        profileId: id,
+        paymentStatus: true,
+      },
+      include: {
+        landmark: {
+          select: {
+            id: true,
+            title: true,
+            price: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    
+    res.json({ result: reservations });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.listMyCampings = async (req, res, next) => {
   try {
     //code body

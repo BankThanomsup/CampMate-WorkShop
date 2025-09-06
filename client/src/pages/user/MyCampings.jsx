@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { formatDate, formatNumber } from "@/utils/formats";
 import BookingPDF from "@/components/booking/BookingPDF";
+import MiniLoadingSpinner from "@/components/ui/MiniLoadingSpinner";
 
 const MyCampings = () => {
   //JS
@@ -44,16 +45,18 @@ const MyCampings = () => {
     <div>
       {/* Header with total count */}
       <div className="mb-4">
-        <h1>
+        <h1 className="mt-4">
           Total Campings : {campings?.length || 0}
         </h1>
       </div>
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-4">
-          <p>Loading...</p>
-        </div>
+        <MiniLoadingSpinner 
+          size="medium"
+          title="กำลังโหลดข้อมูลแคมป์ปิ้ง"
+          description="โปรดรอสักครู่ขณะที่เราดึงข้อมูลแคมป์ปิ้งของคุณ..."
+        />
       )}
       
       {/* Error State */}
@@ -78,7 +81,7 @@ const MyCampings = () => {
 
         <TableBody>
         {campings?.map((item) => {
-            const{id, title, price, category, createdAt} = item;
+            const{id, title, price} = item;
             {/* const {title} = item.landmark; */}
             {/* console.log(item); */}
           return ( 
