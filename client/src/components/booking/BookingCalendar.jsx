@@ -21,22 +21,39 @@ const BookingCalendar = () => {
   const bookedDates = [];
   if (bookings && bookings.length > 0) {
     bookings.forEach(booking => {
-      console.log("Processing booking:", booking);
+      console.log("=== PROCESSING BOOKING ===");
+      console.log("Raw booking:", booking);
       if (booking.checkIn && booking.checkOut) {
+        // แปลง UTC เป็นเวลาท้องถิ่น (Thailand UTC+7)
         const checkIn = new Date(booking.checkIn);
         const checkOut = new Date(booking.checkOut);
         
-        console.log("Check-in:", checkIn, "Check-out:", checkOut);
+        // สร้างวันที่ใหม่โดยใช้ local timezone แทน UTC
+        const localCheckIn = new Date(checkIn.getFullYear(), checkIn.getMonth(), checkIn.getDate());
+        const localCheckOut = new Date(checkOut.getFullYear(), checkOut.getMonth(), checkOut.getDate());
         
-        // เพิ่มทุกวันในช่วงที่ถูกจอง
-        for (let date = new Date(checkIn); date < checkOut; date.setDate(date.getDate() + 1)) {
-          bookedDates.push(new Date(date));
+        console.log("Original checkIn:", booking.checkIn);
+        console.log("Original checkOut:", booking.checkOut);
+        console.log("Parsed checkIn UTC:", checkIn);
+        console.log("Parsed checkOut UTC:", checkOut);
+        console.log("Local checkIn:", localCheckIn);
+        console.log("Local checkOut:", localCheckOut);
+        console.log("CheckIn Thai format:", localCheckIn.toLocaleDateString('th-TH'));
+        console.log("CheckOut Thai format:", localCheckOut.toLocaleDateString('th-TH'));
+        
+        // เพิ่มทุกวันในช่วงที่ถูกจอง (ใช้ local dates)
+        for (let date = new Date(localCheckIn); date < localCheckOut; date.setDate(date.getDate() + 1)) {
+          const bookingDate = new Date(date);
+          console.log("Adding booked date:", bookingDate.toLocaleDateString('th-TH'), bookingDate);
+          bookedDates.push(bookingDate);
         }
       }
+      console.log("=== END PROCESSING ===");
     });
   }
   
-  console.log("Booked dates:", bookedDates);
+  console.log("Final booked dates:", bookedDates);
+  console.log("Booked dates in Thai format:", bookedDates.map(d => d.toLocaleDateString('th-TH')));
   
   // วันที่ไม่สามารถเลือกได้
   const disabledDays = [

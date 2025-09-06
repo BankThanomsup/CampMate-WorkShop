@@ -12,7 +12,7 @@ import BookingContainer from "@/components/booking/BookingContainer";
 function CampingDetail() {
   const { id } = useParams();
   const { getToken } = useAuth();
-  const [camping, setCamping] = useState([]);
+  const [camping, setCamping] = useState({}); // เปลี่ยนจาก [] เป็น {}
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
@@ -98,7 +98,14 @@ function CampingDetail() {
             <span className="text-xl">📅</span>
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">จองที่พัก</h2>
           </div>
-          <BookingContainer campingId={camping.id} price={camping.price} bookings={bookings}/>
+          {/* เช็คว่ามีข้อมูล camping แล้วค่อยส่ง props */}
+          {camping.id && (
+            <BookingContainer 
+              campingId={camping.id} 
+              price={camping.price} 
+              bookings={bookings}
+            />
+          )}
         </div>
       </div>
 
