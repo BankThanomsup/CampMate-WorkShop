@@ -34,10 +34,10 @@ function CampingDetail() {
     try {
       const token = await getToken();
       const res = await getUserCampingBookings(token, campingId);
-      console.log("=== USER CAMPING BOOKINGS DEBUG ===");
-      console.log("Camping ID:", campingId);
-      console.log("User's bookings for this camping:", res.data);
-      console.log("Number of user bookings:", res.data?.length || 0);
+      // console.log("=== USER CAMPING BOOKINGS DEBUG ===");
+      // console.log("Camping ID:", campingId);
+      // console.log("User's bookings for this camping:", res.data);
+      // console.log("Number of user bookings:", res.data?.length || 0);
       if (res.data && res.data.length > 0) {
         res.data.forEach((booking, index) => {
           console.log(`User Booking ${index + 1}:`, {

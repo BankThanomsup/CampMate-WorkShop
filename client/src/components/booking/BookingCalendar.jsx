@@ -32,14 +32,14 @@ const BookingCalendar = () => {
         const localCheckIn = new Date(checkIn.getFullYear(), checkIn.getMonth(), checkIn.getDate());
         const localCheckOut = new Date(checkOut.getFullYear(), checkOut.getMonth(), checkOut.getDate());
         
-        console.log("Original checkIn:", booking.checkIn);
-        console.log("Original checkOut:", booking.checkOut);
-        console.log("Parsed checkIn UTC:", checkIn);
-        console.log("Parsed checkOut UTC:", checkOut);
-        console.log("Local checkIn:", localCheckIn);
-        console.log("Local checkOut:", localCheckOut);
-        console.log("CheckIn Thai format:", localCheckIn.toLocaleDateString('th-TH'));
-        console.log("CheckOut Thai format:", localCheckOut.toLocaleDateString('th-TH'));
+        // console.log("Original checkIn:", booking.checkIn);
+        // console.log("Original checkOut:", booking.checkOut);
+        // console.log("Parsed checkIn UTC:", checkIn);
+        // console.log("Parsed checkOut UTC:", checkOut);
+        // console.log("Local checkIn:", localCheckIn);
+        // console.log("Local checkOut:", localCheckOut);
+        // console.log("CheckIn Thai format:", localCheckIn.toLocaleDateString('th-TH'));
+        // console.log("CheckOut Thai format:", localCheckOut.toLocaleDateString('th-TH'));
         
         // เพิ่มทุกวันในช่วงที่ถูกจอง (ใช้ local dates)
         for (let date = new Date(localCheckIn); date < localCheckOut; date.setDate(date.getDate() + 1)) {
