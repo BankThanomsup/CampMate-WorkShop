@@ -3,7 +3,7 @@ import { useAuth } from '@clerk/clerk-react';
 import AdminGuard from '@/components/admin/AdminGuard';
 import { listCamping, deleteCamping } from '@/api/camping';
 import { createAlert } from '@/utils/createAlert';
-import { Pencil, Trash2, Plus, MapPin, Eye, Calendar } from 'lucide-react';
+import { Pencil, Trash2, Plus, MapPin, Eye, Calendar, Shield } from 'lucide-react';
 import { Link } from 'react-router';
 
 const CampingManagement = () => {
@@ -38,14 +38,24 @@ const CampingManagement = () => {
     try {
       setDeleteLoading(campingId);
       const token = await getToken();
-      await deleteCamping(token, campingId);
+      const response = await deleteCamping(token, campingId);
+      
+      console.log('Delete response:', response); // เพื่อ debug
       
       // Remove from state
       setCampings(prev => prev.filter(camping => camping.id !== campingId));
-      createAlert('success', `ลบแคมป์ปิ้ง "${campingName}" สำเร็จ`);
+      
+      // แสดงข้อความสำเร็จจาก backend หรือใช้ข้อความเริ่มต้น
+      const successMessage = response.data?.message || `ลบแคมป์ปิ้ง "${campingName}" สำเร็จ`;
+      createAlert('success', successMessage);
+      
     } catch (error) {
       console.error('Error deleting camping:', error);
-      createAlert('error', 'ไม่สามารถลบแคมป์ปิ้งได้ กรุณาลองใหม่อีกครั้ง');
+      
+      // แสดงข้อความ error ที่เฉพาะเจาะจงจาก backend
+      const errorMessage = error.response?.data?.message || 'ไม่สามารถลบแคมป์ปิ้งได้ กรุณาลองใหม่อีกครั้ง';
+      createAlert('error', errorMessage);
+      
     } finally {
       setDeleteLoading(null);
     }
@@ -54,12 +64,29 @@ const CampingManagement = () => {
   return (
     <AdminGuard>
       <div className="space-y-6">
+        {/* Admin Header */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg">
+              <Shield className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
+                Admin Panel
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">
+                จัดการแคมป์ปิ้งในระบบ
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">
               จัดการแคมป์ปิ้ง
-            </h1>
+            </h2>
             <p className="text-gray-600 dark:text-gray-300 mt-2 transition-colors duration-300">
               แก้ไขและลบข้อมูลแคมป์ปิ้งในระบบ
             </p>

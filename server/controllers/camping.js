@@ -131,18 +131,121 @@ exports.createCamping = async (req, res, next) => {
 
 exports.updateCamping = async (req, res, next) => {
   try {
-    // console.log("Hello update camping");
-    res.send("Hello update camping");
+    const { id } = req.params;
+    const { title, price, description, category, lat, lng, image } = req.body;
+    const userId = req.user.id;
+    
+    // ตรวจสอบว่า camping นี้มีอยู่จริงหรือไม่
+    const existingCamping = await prisma.landmark.findFirst({
+      where: {
+        id: Number(id)
+      }
+    });
+    
+    if (!existingCamping) {
+      return res.status(404).json({
+        success: false,
+        message: "ไม่พบแคมป์ปิ้งที่ต้องการแก้ไข"
+      });
+    }
+    
+    // เตรียมข้อมูลสำหรับอัพเดท
+    const updateData = {};
+    
+    if (title) updateData.title = title;
+    if (price) updateData.price = Number(price);
+    if (description) updateData.description = description;
+    if (category) updateData.category = category;
+    if (lat) updateData.lat = Number(lat);
+    if (lng) updateData.lng = Number(lng);
+    
+    // อัพเดทรูปภาพถ้ามีการส่งมา
+    if (image && image.public_id && image.secure_url) {
+      updateData.public_id = image.public_id;
+      updateData.secure_url = image.secure_url;
+    }
+    
+    // อัพเดท camping ในฐานข้อมูล
+    const updatedCamping = await prisma.landmark.update({
+      where: {
+        id: Number(id)
+      },
+      data: updateData
+    });
+    
+    res.json({
+      success: true,
+      result: updatedCamping,
+      message: "อัพเดทแคมป์ปิ้งสำเร็จ"
+    });
+    
   } catch (err) {
+    console.error("Error updating camping:", err);
+    
+    if (err.code === 'P2025') {
+      return res.status(404).json({
+        success: false,
+        message: "ไม่พบแคมป์ปิ้งที่ต้องการแก้ไข"
+      });
+    }
+    
     next(err);
   }
 };
 
 exports.deleteCamping = async (req, res, next) => {
   try {
-    // console.log("Hello delete camping");
-    res.send("Hello delete camping");
+    const { id } = req.params;
+    const userId = req.user.id;
+    
+    // ตรวจสอบว่า camping นี้มีอยู่จริงหรือไม่
+    const existingCamping = await prisma.landmark.findFirst({
+      where: {
+        id: Number(id)
+      }
+    });
+    
+    if (!existingCamping) {
+      return res.status(404).json({
+        success: false,
+        message: "ไม่พบแคมป์ปิ้งที่ต้องการลบ"
+      });
+    }
+    
+    // ตรวจสอบสิทธิ์ - เฉพาะเจ้าของหรือ admin เท่านั้นที่ลบได้
+    // (หรือสามารถเพิ่มเงื่อนไขอื่นๆ ตามต้องการ)
+    
+    // ลบ camping จากฐานข้อมูล
+    const deletedCamping = await prisma.landmark.delete({
+      where: {
+        id: Number(id)
+      }
+    });
+    
+    res.json({
+      success: true,
+      result: deletedCamping,
+      message: `ลบแคมป์ปิ้ง "${deletedCamping.title}" สำเร็จ`
+    });
+    
   } catch (err) {
+    console.error("Error deleting camping:", err);
+    
+    // ตรวจสอบ error ประเภทต่างๆ
+    if (err.code === 'P2025') {
+      return res.status(404).json({
+        success: false,
+        message: "ไม่พบแคมป์ปิ้งที่ต้องการลบ"
+      });
+    }
+    
+    if (err.code === 'P2003') {
+      return res.status(400).json({
+        success: false,
+        message: "ไม่สามารถลบแคมป์ปิ้งได้ เนื่องจากมีการจองหรือข้อมูลที่เกี่ยวข้องอยู่"
+      });
+    }
+    
     next(err);
   }
 };

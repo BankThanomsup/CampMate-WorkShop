@@ -52,8 +52,10 @@ const AppRoutes = () => {
           <Route path="manage" element={<Manage />} />
         </Route>
 
-        {/* {Admin Routes without Layout - for better access control} */}
-        <Route path="admin/camping-management" element={<CampingManagement />} />
+        {/* {Admin Routes with Layout and access control} */}
+        <Route path="admin" element={<Layout />}>
+          <Route path="camping-management" element={<CampingManagement />} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>

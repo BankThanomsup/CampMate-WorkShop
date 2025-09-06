@@ -40,12 +40,12 @@ router.post("/camping",authCheck,createCamping);
 // @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD PUT [edit camping]
 // @ACCESS private
-router.put("/camping/:id", updateCamping);
+router.put("/camping/:id", authCheck, updateCamping);
 
-// @ENDPOINT http://localhost:5000/api/camping
+// @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD DELETE [delete camping]
 // @ACCESS private
-router.delete("/camping/:id", deleteCamping);
+router.delete("/camping/:id", authCheck, deleteCamping);
 
 
 router.post("/favorite",authCheck, actionFavorite);
