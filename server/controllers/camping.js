@@ -59,22 +59,22 @@ exports.getCampingBookings = async(req, res, next) => {
     
     const bookings = await prisma.booking.findMany({
       where:{
-        campingId: Number(id),
-        status: {
-          in: ['confirmed', 'paid'] // เฉพาะการจองที่ยืนยันแล้วหรือชำระเงินแล้ว
-        }
+        landmarkId: Number(id),
+        // ไม่มี field status ใน schema ดังนั้นดึงทุก booking ที่มี paymentStatus = true
+        paymentStatus: true
       },
       select: {
         id: true,
         checkIn: true,
         checkOut: true,
-        status: true,
-        campingId: true
+        paymentStatus: true,
+        landmarkId: true
       }
     });
     
     res.json(bookings);
   } catch (err) {
+    console.error("Error fetching camping bookings:", err);
     next(err);
   }
 };
