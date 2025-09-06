@@ -21,6 +21,22 @@ export const readCamping = async (id) => {
     return await axios.get(`${API_URL}/api/camping/${id}`)
 }
 
+export const updateCamping = async (token, id, data) => {
+    return await axios.put(`${API_URL}/api/camping/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const deleteCamping = async (token, id) => {
+    return await axios.delete(`${API_URL}/api/camping/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
 // ดึงข้อมูล bookings ของ camping site ที่ระบุ
 export const getCampingBookings = async (campingId) => {
     return await axios.get(`${API_URL}/api/camping/${campingId}/bookings`)

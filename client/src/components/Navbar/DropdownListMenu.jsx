@@ -7,10 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlignLeft, Home, Info, User, Calendar, Heart, MapPin, Building, BarChart3 } from "lucide-react";
+import { AlignLeft, Home, Info, User, Calendar, Heart, MapPin, Building, BarChart3, Settings } from "lucide-react";
 import Usericon from "./Usericon";
 import { Button } from "../ui/button";
-import { PublicLinks,PrivateLinks } from "@/utils/links";
+import { PublicLinks, PrivateLinks, AdminLinks as AdminLinksData } from "@/utils/links";
 import { Link } from "react-router";
 import {
   SignedIn,
@@ -21,6 +21,7 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import SignOutLink from "./SignOutLink";
+import AdminLinks from "@/components/admin/AdminLinks";
 
 // เพิ่ม icon mapping
 const iconMap = {
@@ -32,6 +33,7 @@ const iconMap = {
   'My Reservations': Calendar,
   'My Campings': MapPin,
   'Camping': Building,
+  'Manage Campings': Settings,
   'Dashboard': BarChart3,
 };
 
@@ -115,6 +117,31 @@ const DropdownListMenu = () => {
                 </DropdownMenuItem>
               );
             })}
+            
+            {/* Admin Links */}
+            <AdminLinks>
+              <DropdownMenuSeparator className="bg-gradient-to-r from-orange-300 to-red-300 dark:from-orange-600 dark:to-red-600 h-0.5 my-2" />
+              <DropdownMenuLabel className="text-center py-2 px-4 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg mb-2 font-medium text-sm shadow-sm">
+                Admin Panel
+              </DropdownMenuLabel>
+              {AdminLinksData.map((item, index) => {
+                const IconComponent = iconMap[item.label] || Building;
+                return (
+                  <DropdownMenuItem key={`admin-${index}`} asChild>
+                    <Link 
+                      to={item.href} 
+                      className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 dark:hover:from-orange-900/20 dark:hover:to-red-900/20 transition-all duration-300 group"
+                    >
+                      <IconComponent className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300" />
+                      <span className="font-medium text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
+                        {item.label}
+                      </span>
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
+            </AdminLinks>
+            
             <DropdownMenuSeparator className="bg-gray-200 dark:bg-gray-600 my-2" />
             <DropdownMenuItem className="p-0">
               <SignOutLink />

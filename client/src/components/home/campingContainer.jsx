@@ -29,7 +29,7 @@ const campingContainer = () => {
   return (
     <div className="space-y-8">
       <CategoryLists />
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors duration-300">
         <MapHome />
       </div>
       <div id="camping-list">

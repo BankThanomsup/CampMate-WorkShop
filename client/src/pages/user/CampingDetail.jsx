@@ -42,13 +42,13 @@ function CampingDetail() {
     // console.log(camping)
 
   return (
-    <div>
+    <div className="space-y-8">
       {/* Breadcrumb */}
       <Breadcrumbs name={camping.title} />
       {/* Header */}
       <header className="mt-6 mb-8">
         {/* title */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">{camping.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">{camping.title}</h1>
       </header>
 
       {/* image */}
@@ -62,10 +62,10 @@ function CampingDetail() {
         
         {/* Location Map */}
         {camping.lat && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 p-6 transition-colors duration-300">
             <div className="flex items-center gap-2 mb-4">
               <span className="text-xl">📍</span>
-              <h2 className="text-2xl font-semibold text-gray-900">ตำแหน่งที่ตั้ง</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">ตำแหน่งที่ตั้ง</h2>
             </div>
             <MainMap location={[camping.lat, camping.lng]} readonly={true}/>
           </div>
@@ -74,10 +74,10 @@ function CampingDetail() {
 
       {/* Calendar */}
       <div className="lg:col-span-4 flex flex-col">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 p-6 sticky top-6 transition-colors duration-300">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xl">📅</span>
-            <h2 className="text-2xl font-semibold text-gray-900">จองที่พัก</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white transition-colors duration-300">จองที่พัก</h2>
           </div>
           <BookingContainer campingId={camping.id} price={camping.price} bookings={bookings}/>
         </div>

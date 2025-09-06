@@ -37,15 +37,15 @@ const MyFavorites = () => {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-pink-100 to-red-100 rounded-full flex items-center justify-center">
-            <Heart className="w-6 h-6 text-red-500" />
+          <div className="w-12 h-12 bg-gradient-to-r from-pink-100 to-red-100 dark:from-pink-900/30 dark:to-red-900/30 rounded-full flex items-center justify-center transition-colors duration-300">
+            <Heart className="w-6 h-6 text-red-500 dark:text-red-400 transition-colors duration-300" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">My Favorites</h1>
-            <p className="text-gray-600">แคมป์ปิ้งที่คุณชื่นชอบ</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors duration-300">My Favorites</h1>
+            <p className="text-gray-600 dark:text-gray-300 transition-colors duration-300">แคมป์ปิ้งที่คุณชื่นชอบ</p>
           </div>
         </div>
-        <div className="text-sm text-gray-500">
+        <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
           รายการแคมป์ปิ้งทั้งหมด: {favorites?.length || 0} แห่ง
         </div>
       </div>
@@ -62,13 +62,13 @@ const MyFavorites = () => {
       {/* Empty State */}
       {!loading && (!favorites || favorites.length === 0) && (
         <div className="text-center py-16">
-          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Heart className="w-12 h-12 text-gray-400" />
+          <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors duration-300">
+            <Heart className="w-12 h-12 text-gray-400 dark:text-gray-500 transition-colors duration-300" />
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
             ยังไม่มีแคมป์ปิ้งที่ชื่นชอบ
           </h3>
-          <p className="text-gray-600 mb-6 max-w-md mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md mx-auto transition-colors duration-300">
             เริ่มต้นสำรวจและกดหัวใจที่แคมป์ปิ้งที่คุณสนใจ เพื่อเก็บไว้ในรายการโปรดของคุณ
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

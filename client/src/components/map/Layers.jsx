@@ -32,9 +32,14 @@ const Layers = () => {
             return (
               <Marker key={element.id} position={[element.lat, element.lng]}>
                 <Popup>
-                  <div className="text-center">
-                  <p className="text-xl font-semibold">{element.title}</p>
-                  <img src={element.secure_url}/>  
+                  <div className="text-center p-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg">
+                    <p className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">{element.title}</p>
+                    <img 
+                      src={element.secure_url} 
+                      alt={element.title}
+                      className="w-48 h-32 object-cover rounded-lg mx-auto"
+                    />
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">฿{element.price.toLocaleString()}/คืน</p>
                   </div>
                 </Popup>
                 <Tooltip>

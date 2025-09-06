@@ -2,6 +2,7 @@ import Layout from "@/Layouts/Layout";
 import LayoutAdmin from "@/Layouts/LayoutAdmin";
 import About from "@/pages/About";
 import Camping from "@/pages/admin/Camping";
+import CampingManagement from "@/pages/admin/CampingManagement";
 import Dashboard from "@/pages/admin/Dashboard";
 import Manage from "@/pages/admin/Manage";
 import Home from "@/pages/Home";
@@ -38,18 +39,21 @@ const AppRoutes = () => {
           <Route path="my-favorites" element={<MyFavorites />} />
           <Route path="my-reservations" element={<MyReservations />} />
           <Route path="my-campings" element={<MyCampings />} />
-
         </Route>
 
+        {/* {Admin Camping - Available for all logged in users} */}
+        <Route path="admin" element={<ProtectRoute el={<Layout />}/>}>
+          <Route path="camping" element={<Camping />} />
+        </Route>
 
-
-
-        {/* {Private Admin} */}
+        {/* {Private Admin Only} */}
         <Route path="admin" element={<ProtectRoute el={<LayoutAdmin />}/>}>
           <Route index element={<Dashboard />} />
           <Route path="manage" element={<Manage />} />
-          <Route path="camping" element={<Camping />} />
         </Route>
+
+        {/* {Admin Routes without Layout - for better access control} */}
+        <Route path="admin/camping-management" element={<CampingManagement />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

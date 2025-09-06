@@ -11,7 +11,10 @@ export const PrivateLinks =[
     {href:'/user/my-reservations',label:'My Reservations'},
     {href:'/user/my-campings',label:'My Campings'},
     {href:'/admin/camping',label:'Camping'},
+]   
+
+export const AdminLinks =[
+    {href:'/admin/camping-management',label:'Manage Campings'},
     {href:'/admin',label:'Dashboard'},
-    
 ]
 
