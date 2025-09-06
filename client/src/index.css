@@ -1,11 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ... */
+/* Global font configuration */
+@layer base {
+  * {
+    font-family: 'Inter', 'Noto Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  body {
+    font-family: 'Inter', 'Noto Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #1f2937;
+    background-color: #fafafa;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'Noto Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #111827;
+  }
+  
+  input, textarea, select, button {
+    font-family: 'Inter', 'Noto Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
 @layer components {
     .container{
-        @apply px-8 mx-auto
+        @apply px-8 mx-auto max-w-7xl
+    }
+    
+    /* เพิ่ม professional styles */
+    .card-professional {
+        @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100;
+    }
+    
+    .text-gradient {
+        @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+    }
+    
+    .btn-primary {
+        @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+    }
+    
+    /* Form Styles */
+    .form-input {
+        @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white hover:border-gray-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-200 focus:ring-opacity-20 focus:outline-none transition-all duration-300 font-medium placeholder:text-gray-400;
+    }
+    
+    .form-label {
+        @apply text-sm font-medium text-gray-700;
+    }
+    
+    /* Page Layouts */
+    .page-container {
+        @apply min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8;
+    }
+    
+    .content-wrapper {
+        @apply container mx-auto px-4 max-w-4xl;
+    }
+    
+    /* Hide scrollbar */
+    .hide-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;  /* Chrome, Safari and Opera */
     }
 }
 

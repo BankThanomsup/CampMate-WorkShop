@@ -44,7 +44,7 @@ const MyOrders = () => {
     <div>
       {/* Header with total count */}
       <div className="mb-4">
-        <h1>
+        <h1 className="mt-5">
           Total Orders : {booking?.length || 0}
         </h1>
       </div>

@@ -1,23 +1,8 @@
 
-import { MapContainer, useMap } from "react-leaflet";
+import { MapContainer } from "react-leaflet";
 import Layers from "./Layers";
-import useCampingStore from "@/store/camping-store";
 import 'leaflet/dist/leaflet.css';
 import '@/utils/leafletConfig';
-
-const MyCenter =( ) =>{
-
-  const center = useCampingStore((state) => state.center)
-  // console.log(center)
-  const map = useMap()
-  if(!center){
-    return null;
-  }
-
-  map.flyTo(center,8)
-
-  return null;
-}
 
 
 
@@ -29,13 +14,12 @@ const MapHome = () => {
     <div>
       <MapContainer
         className="h-[50vh] rounded-md z-0"
-        center={[13, 100]}
-        zoom={7}
+        center={[13.7563, 100.5018]} // ใช้พิกัดกรุงเทพฯ เหมือน MainMap
+        zoom={7} // ใช้ซูมเดียวกันกับ MainMap
         scrollWheelZoom={true}
       >
 
         <Layers />
-      <MyCenter />
       </MapContainer>
     </div>
   );

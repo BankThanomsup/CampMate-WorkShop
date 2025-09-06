@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-react";
 import CategoryLists from "./CategoryLists";
 import { useSearchParams } from "react-router";
+
 const campingContainer = () => {
   const actionListCamping = useCampingStore((state) => state.actionListCamping);
   const actionFilter = useCampingStore((state) => state.actionFilter);
@@ -13,22 +14,11 @@ const campingContainer = () => {
   //clerk
   const { user } = useUser();
   const id = user?.id ?? null;
-  // useEffect(()=>{
 
-  //   // || find first true
-  //   // && find first false
-  //   // ?? nullish null or undefined --> right
-
-  //   // console.log("id", id)
-
-  // },[user?.id])
-
-  // console.log("campingContainer",actionListCamping)
   const category = searchParams.get("category");
   const search = searchParams.get("search");
+  
   useEffect(() => {
-    // console.log("are you ready")
-    // console.log(category,search)
     if (search || category) {
       actionFilter(category, search);
     } else if (!search && !category) {
@@ -37,10 +27,14 @@ const campingContainer = () => {
   }, [search, category]);
 
   return (
-    <div>
+    <div className="space-y-8">
       <CategoryLists />
-      <MapHome />
-      <CampingLists />
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <MapHome />
+      </div>
+      <div id="camping-list">
+        <CampingLists />
+      </div>
     </div>
   );
 };

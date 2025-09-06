@@ -10,6 +10,10 @@ module.exports = {
     			sm: 'calc(var(--radius) - 4px)'
     		},
     		colors: {},
+    		fontFamily: {
+    			'sans': ['Inter', 'Noto Sans Thai', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    			'display': ['Inter', 'Noto Sans Thai', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    		}
     	}
     },
     plugins: [require("tailwindcss-animate")],

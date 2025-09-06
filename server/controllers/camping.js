@@ -54,27 +54,50 @@ exports.readCamping = async(req, res, next) => {
 
 exports.createCamping = async (req, res, next) => {
   try {
-    // console.log("req.body", req.body);
-    const{ title, price, description, category,lat,lng,image } = req.body;
-    // console.log(image)
+    console.log("req.body", req.body);
+    const{ title, price, description, category, lat, lng, image } = req.body;
     const{ id } = req.user;
+    
+    // Validate required fields
+    if (!title || !price || !description || !category || !lat || !lng) {
+      return res.status(400).json({
+        success: false,
+        message: "กรุณากรอกข้อมูลให้ครบถ้วน"
+      });
+    }
+    
+    // Validate image object
+    if (!image || !image.public_id || !image.secure_url) {
+      return res.status(400).json({
+        success: false,
+        message: "กรุณาอัพโหลดรูปภาพ"
+      });
+    }
+    
+    console.log("Creating camping with image:", image);
+    
     const camping = await prisma.landmark.create({
       data:{
         title,
-        price,
+        price: Number(price),
         description,
         category,
-        lat,
-        lng,
+        lat: Number(lat),
+        lng: Number(lng),
         public_id: image.public_id,
         secure_url: image.secure_url,
         profileId: id
       },
     });
-    res.json({result: camping, message: "Camping created successfully"});
+    
+    res.json({
+      success: true,
+      result: camping, 
+      message: "Camping created successfully"
+    });
   } 
   catch (err) {
-    console.log(err);
+    console.error("Error creating camping:", err);
     next(err);
   }
 };

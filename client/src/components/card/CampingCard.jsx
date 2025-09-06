@@ -2,6 +2,8 @@
 import { motion } from "motion/react";
 import { Link } from "react-router";
 import FavoriteToggleButton from "./FavoriteToggleButton";
+import { MapPin, Star } from "lucide-react";
+
 const CampingCard = ({ camping }) => {
   // console.log(camping);
   // const { title } = props.camping;
@@ -10,40 +12,67 @@ const CampingCard = ({ camping }) => {
     <motion.div
       initial={{
         opacity: 0,
-        scale: 0.2,
-        rotate: 180,
+        y: 20,
       }}
       animate={{
         opacity: 1,
-        scale: 1,
-        rotate: 0,
+        y: 0,
       }}
       transition={{
-        duration: 0.5,
+        duration: 0.4,
+        ease: "easeOut"
       }}
+      whileHover={{
+        y: -8,
+        transition: { duration: 0.2, ease: "easeOut" }
+      }}
+      className="group h-full"
     >
-      <article className=" relative hover:scale-105 hover:duration-300 shadow-md p-2 rounded">
-        <Link to={`/user/camping/${camping.id}`}>
-          <div className="h-[300px] rounded-md mb-2">
+      <article className="card-professional relative overflow-hidden h-full flex flex-col">
+        <Link to={`/user/camping/${camping.id}`} className="flex flex-col h-full">
+          {/* Image Container with Overlay */}
+          <div className="relative h-[280px] overflow-hidden flex-shrink-0">
             <img
               src={camping.secure_url}
-              className="w-full h-full object-cover rounded-md"
+              alt={camping.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Price badge */}
+            <div className="absolute top-4 left-4">
+              <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-sm font-semibold shadow-md">
+                ฿{camping.price.toLocaleString()}/คืน
+              </span>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">{camping.title}</h3>
-          </div>
-          <p className="text-gray-700 text-sm">
-            {camping.description.substring(0, 50)} ดูเพิ่มเติม ...
-          </p>
-          <div className="flex justify-between ">
-            <p className="font-semibold">{camping.price} Baht</p>
-            <p>
-              {camping.lat.toFixed(4)} ,{camping.lng.toFixed(4)}
+          
+          {/* Content */}
+          <div className="p-6 flex flex-col flex-grow">
+            <div className="mb-3">
+              <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2 min-h-[56px]">
+                {camping.title}
+              </h3>
+            </div>
+            
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed flex-grow min-h-[60px]">
+              {camping.description}
             </p>
+            
+            {/* Location and Rating */}
+            <div className="flex items-center justify-between text-sm mt-auto">
+              <div className="flex items-center text-gray-500">
+                <MapPin className="h-4 w-4 mr-1" />
+                <span>{camping.lat.toFixed(2)}, {camping.lng.toFixed(2)}</span>
+              </div>
+              
+              {/* ลบส่วนแสดงดาวเนื่องจากไม่มีข้อมูลจริงจาก API */}
+            </div>
           </div>
         </Link>
-        {/* Favorite Button*/}
+        
+        {/* Favorite Button */}
         <div className="absolute top-4 right-4">
           <FavoriteToggleButton isFavorite={camping.isFavorite} campingId={camping.id} />
         </div>

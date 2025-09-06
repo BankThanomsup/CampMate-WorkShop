@@ -13,7 +13,7 @@ const BookingContainer = ({campingId,price,bookings}) => {
     })
   },[campingId])
     return (
-    <div className="flex flex-col mb-8">
+    <div className="flex flex-col mb-8 w-full">
         <BookingCalendar />
         <BookingFrom />
     </div>

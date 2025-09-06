@@ -37,33 +37,41 @@ function CampingDetail() {
       {/* Breadcrumb */}
       <Breadcrumbs name={camping.title} />
       {/* Header */}
-      <header className="flex items-center justify-between mt-2">
+      <header className="mt-6 mb-8">
         {/* title */}
-        <h1 className="text-3xl font-bold">{camping.title}</h1>
-        <div className="flex gap-4">
-          {/* ShareButton */}
-          <p>Share</p>
-          {/* FavoriteButton */}
-          <p>Favorite</p>
-        </div>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">{camping.title}</h1>
       </header>
 
       {/* image */}
       <ImageContainer image={camping.secure_url} name={camping.name}/>
 
       {/* Description & Map*/}
-      <section className="lg:grid grid-cols-12 gap-x-12 mt-12">
+      <section className="lg:grid grid-cols-12 gap-8 mt-12 space-y-8 lg:space-y-0">
 
-      <div className="lg:col-span-8 col-span-12">
-      <Description text={camping.description}/>
-       {
-        camping.lat && <MainMap location={[camping.lat , camping.lng]}/>
-       } 
+      <div className="lg:col-span-8 col-span-12 space-y-8">
+        <Description text={camping.description} camping={camping}/>
+        
+        {/* Location Map */}
+        {camping.lat && (
+          <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xl">📍</span>
+              <h2 className="text-2xl font-semibold text-gray-900">ตำแหน่งที่ตั้ง</h2>
+            </div>
+            <MainMap location={[camping.lat, camping.lng]}/>
+          </div>
+        )}
       </div>
 
       {/* Calendar */}
-      <div className="lg:col-span-4 flex flex-col items-center">
-        <BookingContainer campingId={camping.id} price={camping.price} bookings={[]}/>
+      <div className="lg:col-span-4 flex flex-col">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 sticky top-6">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">📅</span>
+            <h2 className="text-2xl font-semibold text-gray-900">จองที่พัก</h2>
+          </div>
+          <BookingContainer campingId={camping.id} price={camping.price} bookings={[]}/>
+        </div>
       </div>
 
       </section>

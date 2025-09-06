@@ -16,7 +16,7 @@ const CampingLists = () => {
     return <EmptyList />
   }
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-4">
+    <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-4 auto-rows-fr">
       {campings.map((element) => {
         return <CampingCard key={element.id} 
         camping={element}/> 

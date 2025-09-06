@@ -1,8 +1,7 @@
 const turf = require("@turf/turf")
 
 exports.findCenter = (data) =>{
-    console.log(data);
-    console.log("Jukkruuu");
+    // console.log(data);
     if(data.length === 0) {
         return null;
     }
