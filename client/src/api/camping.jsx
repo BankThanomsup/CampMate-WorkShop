@@ -37,9 +37,18 @@ export const deleteCamping = async (token, id) => {
     })
 }
 
-// ดึงข้อมูล bookings ของ camping site ที่ระบุ
+// ดึงข้อมูล bookings ของ camping site ที่ระบุ (ทุกคน)
 export const getCampingBookings = async (campingId) => {
     return await axios.get(`${API_URL}/api/camping/${campingId}/bookings`)
+}
+
+// ดึงข้อมูล bookings ของ user ปัจจุบันสำหรับ camping site ที่ระบุ
+export const getUserCampingBookings = async (token, campingId) => {
+    return await axios.get(`${API_URL}/api/camping/${campingId}/user-bookings`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 }
 
 

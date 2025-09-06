@@ -93,7 +93,7 @@ const CampingManagement = () => {
           </div>
           
           <Link 
-            to="/admin/camping/create"
+            to="/admin/camping"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <Plus className="w-5 h-5" />

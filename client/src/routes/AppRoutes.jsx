@@ -3,6 +3,7 @@ import LayoutAdmin from "@/Layouts/LayoutAdmin";
 import About from "@/pages/About";
 import Camping from "@/pages/admin/Camping";
 import CampingManagement from "@/pages/admin/CampingManagement";
+import EditCamping from "@/pages/admin/EditCamping";
 import Dashboard from "@/pages/admin/Dashboard";
 import Manage from "@/pages/admin/Manage";
 import Home from "@/pages/Home";
@@ -55,6 +56,7 @@ const AppRoutes = () => {
         {/* {Admin Routes with Layout and access control} */}
         <Route path="admin" element={<Layout />}>
           <Route path="camping-management" element={<CampingManagement />} />
+          <Route path="camping/edit/:id" element={<EditCamping />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

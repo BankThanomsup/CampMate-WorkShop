@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import axios from "axios";
-import { readCamping, getCampingBookings } from "@/api/camping";
+import { readCamping, getUserCampingBookings } from "@/api/camping";
+import { useAuth } from '@clerk/clerk-react';
 import { useEffect, useState } from "react";
 import Breadcrumbs from "@/components/campingDetail/Breadcrumbs";
 import ImageContainer from "@/components/campingDetail/ImageContainer";
@@ -10,13 +11,14 @@ import BookingContainer from "@/components/booking/BookingContainer";
 
 function CampingDetail() {
   const { id } = useParams();
+  const { getToken } = useAuth();
   const [camping, setCamping] = useState([]);
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     //code
     fetchCampingDetail(id);
-    fetchBookings(id);
+    fetchUserBookings(id);
   }, []);
 
   const fetchCampingDetail = async (id) => {
@@ -28,13 +30,30 @@ function CampingDetail() {
     }
   };
 
-  const fetchBookings = async (campingId) => {
+  const fetchUserBookings = async (campingId) => {
     try {
-      const res = await getCampingBookings(campingId);
-      console.log("Camping bookings for ID", campingId, ":", res.data);
+      const token = await getToken();
+      const res = await getUserCampingBookings(token, campingId);
+      console.log("=== USER CAMPING BOOKINGS DEBUG ===");
+      console.log("Camping ID:", campingId);
+      console.log("User's bookings for this camping:", res.data);
+      console.log("Number of user bookings:", res.data?.length || 0);
+      if (res.data && res.data.length > 0) {
+        res.data.forEach((booking, index) => {
+          console.log(`User Booking ${index + 1}:`, {
+            id: booking.id,
+            checkIn: booking.checkIn,
+            checkOut: booking.checkOut,
+            landmarkId: booking.landmarkId,
+            profileId: booking.profileId,
+            paymentStatus: booking.paymentStatus
+          });
+        });
+      }
+      console.log("=== END DEBUG ===");
       setBookings(res.data);
     } catch (error) {
-      console.error("Error fetching camping bookings:", error);
+      console.error("Error fetching user camping bookings:", error);
       // ถ้าไม่สามารถดึงข้อมูลได้ ให้ใช้ array ว่าง
       setBookings([]);
     }

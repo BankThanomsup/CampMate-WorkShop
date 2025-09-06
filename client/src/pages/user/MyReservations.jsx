@@ -30,8 +30,26 @@ const MyReservations = () => {
     try {
       setLoading(true);
       setError(null);
+      console.log("=== MY RESERVATIONS DEBUG ===");
+      console.log("Fetching user reservations with token...");
       const res = await listUserReservations(token);
-      console.log(res);
+      console.log("User reservations response:", res);
+      console.log("User reservations data:", res.data);
+      console.log("User reservations result:", res.data.result);
+      console.log("Number of user reservations:", res.data.result?.length || 0);
+      if (res.data.result && res.data.result.length > 0) {
+        res.data.result.forEach((reservation, index) => {
+          console.log(`User Reservation ${index + 1}:`, {
+            id: reservation.id,
+            checkIn: reservation.checkIn,
+            checkOut: reservation.checkOut,
+            landmarkId: reservation.landmarkId,
+            total: reservation.total,
+            landmark: reservation.landmark
+          });
+        });
+      }
+      console.log("=== END DEBUG ===");
       setReservations(res.data.result || []);
     } catch (error) {
       console.log(error);

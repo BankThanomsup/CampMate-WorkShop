@@ -52,7 +52,7 @@ exports.readCamping = async(req, res, next) => {
   }
 };
 
-// ดึงข้อมูล bookings ของ camping site ที่ระบุ
+// ดึงข้อมูล bookings ของ camping site ที่ระบุ (ทุกคน)
 exports.getCampingBookings = async(req, res, next) => {
   try {
     const { id } = req.params;
@@ -75,6 +75,35 @@ exports.getCampingBookings = async(req, res, next) => {
     res.json(bookings);
   } catch (err) {
     console.error("Error fetching camping bookings:", err);
+    next(err);
+  }
+};
+
+// ดึงข้อมูล bookings ของ user ปัจจุบันสำหรับ camping site ที่ระบุ
+exports.getUserCampingBookings = async(req, res, next) => {
+  try {
+    const { id } = req.params; // camping id
+    const userId = req.user.id; // user id จาก token
+    
+    const bookings = await prisma.booking.findMany({
+      where:{
+        landmarkId: Number(id),
+        profileId: userId,
+        paymentStatus: true
+      },
+      select: {
+        id: true,
+        checkIn: true,
+        checkOut: true,
+        paymentStatus: true,
+        landmarkId: true,
+        profileId: true
+      }
+    });
+    
+    res.json(bookings);
+  } catch (err) {
+    console.error("Error fetching user camping bookings:", err);
     next(err);
   }
 };
