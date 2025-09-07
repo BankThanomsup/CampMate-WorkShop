@@ -306,7 +306,6 @@ exports.actionFavorite = async(req,res,next) =>{
     const {campingId, isFavorite} = req.body;
     const {id} = req.user;
 
-
     let result
 
     if(isFavorite){
@@ -325,7 +324,12 @@ exports.actionFavorite = async(req,res,next) =>{
       });
     }
 
-    res.json({result: result, message: isFavorite ?'Remove favorite'  : 'Add favorite'});
+    res.json({
+      success: true,
+      result: result, 
+      message: isFavorite ? 'Remove favorite' : 'Add favorite',
+      newFavoriteStatus: !isFavorite
+    });
   } catch (error) {
     next(error);
     
