@@ -14,8 +14,14 @@ export const createCamping =async (token , data)=>{
     })  
 }
 
-export const listCamping = async (id) => {
-    return await axios.get(`${API_URL}/api/campings/${id}`)}
+// แก้ไขฟังก์ชันนี้ - เปลี่ยนจาก listCamping(id) เป็น listCamping(token)
+export const listCamping = async (token) => {
+    return await axios.get(`${API_URL}/api/campings`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
 
 export const readCamping = async (id) => {
     return await axios.get(`${API_URL}/api/camping/${id}`)
@@ -50,9 +56,6 @@ export const getUserCampingBookings = async (token, campingId) => {
         }
     })
 }
-
-
-
 
 export const addorRemoveFavoriteCamping =async (token , data)=>{
 
