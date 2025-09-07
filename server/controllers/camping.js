@@ -2,32 +2,34 @@ const prisma = require("../config/prisma");
 const { findCenter } = require("../utils/findCenter");
 
 
+
 exports.listCamping = async (req, res, next) => {
   try {
-    // ลบ const { id } = req.params; ออก
-    // ใช้ user id จาก token แทน
     const userId = req.user?.id;
     
-    const campings = await prisma.landmark.findMany({
-      include:{
-        favorites:{
-          where:{
-            profileId: userId || null // ถ้าไม่มี user id ให้เป็น null
-          },
-          select:{
-            id:true
-          }
+    // เช็คว่ามี userId หรือไม่ เพื่อกำหนด include favorites
+    const includeOptions = userId ? {
+      favorites: {
+        where: {
+          profileId: userId
+        },
+        select: {
+          id: true
         }
-      },
+      }
+    } : {};
+    
+    const campings = await prisma.landmark.findMany({
+      include: includeOptions,
       orderBy: {
         createdAt: 'desc'
       }
-    })
+    });
     
-    const campingWithlike = campings.map((element)=>{
+    const campingWithlike = campings.map((element) => {
       return {
         ...element, 
-        isFavorite: element.favorites.length > 0 ,
+        isFavorite: element.favorites ? element.favorites.length > 0 : false,
       }
     });
 
@@ -45,6 +47,7 @@ exports.listCamping = async (req, res, next) => {
     next(err)
   }
 };
+
 
 exports.readCamping = async(req, res, next) => {
 
