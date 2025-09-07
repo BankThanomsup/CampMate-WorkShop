@@ -7,7 +7,6 @@ exports.listCamping = async (req, res, next) => {
   try {
     const userId = req.user?.id;
     
-    // เช็คว่ามี userId หรือไม่ เพื่อกำหนด include favorites
     const includeOptions = userId ? {
       favorites: {
         where: {
@@ -35,7 +34,15 @@ exports.listCamping = async (req, res, next) => {
 
     // Find Center
     const center = findCenter(campingWithlike);
-    
+
+    // เพิ่ม no-cache headers
+    res.set({
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+
+
     res.json({
       success: true,
       result: campingWithlike, 
