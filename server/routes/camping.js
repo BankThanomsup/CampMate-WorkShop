@@ -15,10 +15,13 @@ const {
 } = require("../controllers/camping");
 const { authCheck } = require("../middlewares/auth");
 
+
+router.get('/', authCheck, listCamping);
+
 // @ENDPOINT http://localhost:5000/api/camping
 // @METHOD GET [get list camping]
 // @ACCESS public
-router.get("/campings/:id",listCamping);
+router.get("/campings",listCamping);
 
 // @ENDPOINT http://localhost:5000/api/camping/1
 // @METHOD GET [get read camping]
@@ -61,5 +64,6 @@ router.get("/favorites",authCheck, listFavorites);
 
   
 router.get("/filter-camping", filterCamping);
+ 
 
 module.exports = router;
