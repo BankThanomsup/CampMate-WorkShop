@@ -4,34 +4,44 @@ const { findCenter } = require("../utils/findCenter");
 
 exports.listCamping = async (req, res, next) => {
   try {
-    const { id } = req.params;
-      // console.log(id)
+    // ลบ const { id } = req.params; ออก
+    // ใช้ user id จาก token แทน
+    const userId = req.user?.id;
+    
     const campings = await prisma.landmark.findMany({
       include:{
         favorites:{
           where:{
-            profileId: id
+            profileId: userId || null // ถ้าไม่มี user id ให้เป็น null
           },
           select:{
             id:true
           }
         }
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     })
-    //console.log(campings);
+    
     const campingWithlike = campings.map((element)=>{
-
       return {
         ...element, 
         isFavorite: element.favorites.length > 0 ,
       }
     });
 
-       //Find Center
-      const center = findCenter(campingWithlike);
-    // console.log(campingWithlike)
-  res.json({result: campingWithlike, center: center});
+    // Find Center
+    const center = findCenter(campingWithlike);
+    
+    res.json({
+      success: true,
+      result: campingWithlike, 
+      center: center,
+      message: "Campings retrieved successfully"
+    });
   } catch (err) {
+    console.error("Error listing campings:", err);
     next(err)
   }
 };
